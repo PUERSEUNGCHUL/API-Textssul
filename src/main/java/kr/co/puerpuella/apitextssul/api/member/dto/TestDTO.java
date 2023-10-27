@@ -1,4 +1,4 @@
-package kr.co.puerpuella.apitextssul.api.dto;
+package kr.co.puerpuella.apitextssul.api.member.dto;
 
 import lombok.Builder;
 import lombok.Data;

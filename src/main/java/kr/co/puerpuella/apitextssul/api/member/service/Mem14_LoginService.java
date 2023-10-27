@@ -1,7 +1,7 @@
-package kr.co.puerpuella.apitextssul.api.service;
+package kr.co.puerpuella.apitextssul.api.member.service;
 
-import kr.co.puerpuella.apitextssul.api.dto.form.LoginForm;
-import kr.co.puerpuella.apitextssul.api.dto.result.LoginDto;
+import kr.co.puerpuella.apitextssul.api.member.dto.form.LoginForm;
+import kr.co.puerpuella.apitextssul.api.member.dto.result.LoginDto;
 import kr.co.puerpuella.apitextssul.common.enums.ErrorInfo;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class LoginService extends CommonService implements UserDetailsService {
+public class Mem14_LoginService extends CommonService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 

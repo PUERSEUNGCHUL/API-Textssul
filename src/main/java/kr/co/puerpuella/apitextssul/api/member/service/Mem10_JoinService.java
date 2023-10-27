@@ -1,8 +1,8 @@
-package kr.co.puerpuella.apitextssul.api.service;
+package kr.co.puerpuella.apitextssul.api.member.service;
 
 
-import kr.co.puerpuella.apitextssul.api.dto.MemberInfoDto;
-import kr.co.puerpuella.apitextssul.api.dto.form.JoinForm;
+import kr.co.puerpuella.apitextssul.api.member.dto.MemberInfoDto;
+import kr.co.puerpuella.apitextssul.api.member.dto.form.JoinForm;
 import kr.co.puerpuella.apitextssul.common.enums.ErrorInfo;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-public class MemberJoinService extends CommonService {
+public class Mem10_JoinService extends CommonService {
     
     /** 패스워드 암호화 모듈 */
     private final PasswordEncoder passwordEncoder;

@@ -1,4 +1,4 @@
-package kr.co.puerpuella.apitextssul.api.dto.form;
+package kr.co.puerpuella.apitextssul.api.member.dto.form;
 
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import lombok.AllArgsConstructor;

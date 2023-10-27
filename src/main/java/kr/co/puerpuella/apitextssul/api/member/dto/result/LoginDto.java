@@ -1,4 +1,4 @@
-package kr.co.puerpuella.apitextssul.api.dto.result;
+package kr.co.puerpuella.apitextssul.api.member.dto.result;
 
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 import lombok.AllArgsConstructor;

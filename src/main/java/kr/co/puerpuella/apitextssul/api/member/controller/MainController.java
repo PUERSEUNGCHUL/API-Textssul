@@ -1,9 +1,9 @@
-package kr.co.puerpuella.apitextssul.api.controller;
+package kr.co.puerpuella.apitextssul.api.member.controller;
 
-import kr.co.puerpuella.apitextssul.api.dto.form.JoinForm;
-import kr.co.puerpuella.apitextssul.api.dto.form.LoginForm;
-import kr.co.puerpuella.apitextssul.api.service.LoginService;
-import kr.co.puerpuella.apitextssul.api.service.MemberJoinService;
+import kr.co.puerpuella.apitextssul.api.member.dto.form.JoinForm;
+import kr.co.puerpuella.apitextssul.api.member.dto.form.LoginForm;
+import kr.co.puerpuella.apitextssul.api.member.service.Mem14_LoginService;
+import kr.co.puerpuella.apitextssul.api.member.service.Mem10_JoinService;
 import kr.co.puerpuella.apitextssul.common.framework.CommonController;
 import kr.co.puerpuella.apitextssul.common.framework.response.ResponseBody;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MainController extends CommonController {
 
-    private final LoginService loginService;
+    private final Mem14_LoginService loginService;
 
-    private final MemberJoinService joinService;
+    private final Mem10_JoinService joinService;
 
     @PostMapping("/v1/api/members/login")
     public ResponseBody login(@RequestBody LoginForm loginForm) {
