@@ -21,15 +21,20 @@ import java.util.Collection;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "UID")
     private Long uid;
 
+    @Column(name = "EMAIL")
     private String email;
 
+    @Column(name = "NICKNAME")
     private String nickname;
 
+    @Column(name = "PASSWORD")
     private String password;
 
+    @Column(name = "ROLE")
     private Roles role;
 
     /**

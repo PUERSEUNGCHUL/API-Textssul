@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class MainController extends CommonController {
+public class MemberController extends CommonController {
 
     private final Mem14_LoginService loginService;
 
