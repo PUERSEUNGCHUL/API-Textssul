@@ -4,7 +4,7 @@ import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 
-public class Art03_ArticleRegistService extends CommonService {
+public class Art03ArticleRegistService extends CommonService {
     @Override
     protected CommonReturnData execute(CommonDTO... params) {
         return null;

@@ -4,6 +4,8 @@ package kr.co.puerpuella.apitextssul.common.framework;
 import kr.co.puerpuella.apitextssul.common.framework.exception.ValidationException;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 import kr.co.puerpuella.apitextssul.common.framework.response.ResponseBody;
+import kr.co.puerpuella.apitextssul.common.framework.response.ResponseInfo;
+import org.springframework.http.ResponseEntity;
 
 /**
  * Rest컨트롤러의 공통기능
@@ -13,7 +15,7 @@ import kr.co.puerpuella.apitextssul.common.framework.response.ResponseBody;
  */
 public class CommonController {
 
-    protected ResponseBody execute(CommonService service, CommonDTO param) {
+    protected ResponseEntity execute(CommonService service, CommonDTO param) {
         return getResponseBody(service, new CommonDTO[] {param});
     }
 
@@ -24,13 +26,13 @@ public class CommonController {
      * @param params 전달할 파라미터
      * @return Front단에 전달할 응답객체
      */
-    protected ResponseBody execute(CommonService service, CommonDTO ...params) {
+    protected ResponseEntity<ResponseBody> execute(CommonService service, CommonDTO ...params) {
 
         return getResponseBody(service, params);
 
     }
 
-    private static ResponseBody getResponseBody(CommonService service, CommonDTO[] params) {
+    private static ResponseEntity<ResponseBody> getResponseBody(CommonService service, CommonDTO[] params) {
         ResponseBody responseBody;
 
         try {
@@ -40,17 +42,20 @@ public class CommonController {
 
             // 서비스의 결과값을 ResponseBody로 감싼다.
             responseBody = ResponseBody.builder()
-                    .status("0")
-                    .responseData(returnData).build();
+                    .responseData(returnData)
+                    .responseInfo(ResponseInfo.builder().responseCode(200).build())
+                    .build();
+
+            return ResponseEntity.ok().body(responseBody);
         } catch (ValidationException e) {
             // 서비스의 실행중 ValidationException이 발생한경우 (입력받은 Form데이터가 서비스실행의 문제가 되는 경우 발생한다.)
 
             // 에러정보를 ResponseBody로 감싼다.
             responseBody = ResponseBody.builder()
-                    .status("1")
-                    .errorInfo(e.getErrorInfo()).build();
+                    .responseInfo(ResponseInfo.builder().responseCode(e.getErrorInfo().errorCode).responseMsg(e.getErrorInfo().errorMessage).build())
+                    .build();
+            return ResponseEntity.ok().body(responseBody);
 
         }
-        return responseBody;
     }
 }

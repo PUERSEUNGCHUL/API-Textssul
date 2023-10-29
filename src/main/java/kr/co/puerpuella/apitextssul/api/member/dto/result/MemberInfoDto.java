@@ -1,4 +1,4 @@
-package kr.co.puerpuella.apitextssul.api.member.dto;
+package kr.co.puerpuella.apitextssul.api.member.dto.result;
 
 import kr.co.puerpuella.apitextssul.common.enums.Roles;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;

@@ -1,7 +1,7 @@
 package kr.co.puerpuella.apitextssul.api.member.service;
 
 
-import kr.co.puerpuella.apitextssul.api.member.dto.MemberInfoDto;
+import kr.co.puerpuella.apitextssul.api.member.dto.result.MemberInfoDto;
 import kr.co.puerpuella.apitextssul.api.member.dto.form.JoinForm;
 import kr.co.puerpuella.apitextssul.common.enums.ErrorInfo;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
