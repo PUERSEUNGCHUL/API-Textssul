@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 public enum ArticleCategory {
 
+    BASIC(1, "기본");
     ;
     private int categoryId;
     private String categoryName;
@@ -21,9 +22,9 @@ public enum ArticleCategory {
     private static final Map<Integer, ArticleCategory> CODE_MAP = Stream.of(values()).collect(Collectors.toMap(ArticleCategory::getCategoryId, Function.identity()));
 
     @JsonCreator
-    public static ArticleCategory resolve(Long type) {
+    public static ArticleCategory resolve(Integer type) {
 
-        return Optional.ofNullable(CODE_MAP.get(type)).orElseThrow(() -> new IllegalArgumentException(type+" is invalid value"));
+        return Optional.ofNullable(CODE_MAP.get(type)).orElse(null);
     }
 
     public static ArticleCategory valueOf(Integer categoryId) {

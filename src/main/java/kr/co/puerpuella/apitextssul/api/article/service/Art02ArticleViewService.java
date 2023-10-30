@@ -1,12 +1,31 @@
 package kr.co.puerpuella.apitextssul.api.article.service;
 
+import kr.co.puerpuella.apitextssul.api.article.dto.request.Art02Request;
+import kr.co.puerpuella.apitextssul.api.article.dto.response.Art01Response;
+import kr.co.puerpuella.apitextssul.api.article.dto.response.Art02Response;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
+import kr.co.puerpuella.apitextssul.model.entity.Article;
+import kr.co.puerpuella.apitextssul.model.repositories.ArticleRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
+@Service
+@RequiredArgsConstructor
 public class Art02ArticleViewService extends CommonService {
+
+    private final ArticleRepository articleRepository;
     @Override
     protected CommonReturnData execute(CommonDTO... params) {
-        return null;
+
+        Art02Request request = (Art02Request) params[0];
+
+        Art02Response response = new Art02Response();
+
+        response.convertEntityToDto(articleRepository.findOneByArticleId(request.getArticleId()));
+
+        return response;
     }
 }

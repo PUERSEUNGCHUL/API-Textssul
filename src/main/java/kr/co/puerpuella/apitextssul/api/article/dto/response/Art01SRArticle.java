@@ -48,5 +48,5 @@ public class Art01SRArticle{
     private int thumbnailImageId;
 
     /** 썸네일 이미지 바이트 */
-    private byte[] thumbnailImage;
+    private String thumbnailImagePath;
 }

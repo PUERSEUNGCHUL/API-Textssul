@@ -13,15 +13,16 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 public enum ArticleType {
 
+    BASIC(1, "기본");
     ;
     private int typeId;
     private String typeName;
     private static final Map<Integer, ArticleType> CODE_MAP = Stream.of(values()).collect(Collectors.toMap(ArticleType::getTypeId, Function.identity()));
 
     @JsonCreator
-    public static ArticleType resolve(Long type) {
+    public static ArticleType resolve(Integer type) {
 
-        return Optional.ofNullable(CODE_MAP.get(type)).orElseThrow(() -> new IllegalArgumentException(type+" is invalid value"));
+        return Optional.ofNullable(CODE_MAP.get(type)).orElse(null);
     }
 
     public static ArticleType valueOf(Integer typeId) {

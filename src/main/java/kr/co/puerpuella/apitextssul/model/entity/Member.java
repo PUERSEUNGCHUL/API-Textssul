@@ -13,17 +13,17 @@ import java.util.Collection;
  * 회원 테이블 엔티티
  */
 @Entity
-@Table(name="T_MEMBER")
+@Table(name="TB_MEMBER")
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+public class Member extends LabelEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UID")
-    private Long uid;
+    private Integer uid;
 
     @Column(name = "EMAIL")
     private String email;

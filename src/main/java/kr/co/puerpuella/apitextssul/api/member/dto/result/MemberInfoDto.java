@@ -10,7 +10,7 @@ import lombok.Getter;
 public class MemberInfoDto extends CommonReturnData {
 
     //UID
-    private Long uid;
+    private Integer uid;
 
     //메일주소
     private String email;

@@ -1,11 +1,13 @@
 package kr.co.puerpuella.apitextssul.common.framework;
 
 
+import jakarta.transaction.Transactional;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 
 /**
  * 서비스의 집합
  */
+@Transactional
 public abstract class CommonService {
 
     /**

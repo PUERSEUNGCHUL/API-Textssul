@@ -1,11 +1,20 @@
 package kr.co.puerpuella.apitextssul.api.article.service;
 
+import kr.co.puerpuella.apitextssul.api.article.dto.request.Art01Request;
 import kr.co.puerpuella.apitextssul.api.article.dto.response.Art01Response;
 import kr.co.puerpuella.apitextssul.api.article.dto.response.Art01SRArticle;
+import kr.co.puerpuella.apitextssul.common.enums.ArticleCategory;
+import kr.co.puerpuella.apitextssul.common.enums.ArticleType;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 import kr.co.puerpuella.apitextssul.common.framework.response.ResponseBody;
+import kr.co.puerpuella.apitextssul.model.entity.Article;
+import kr.co.puerpuella.apitextssul.model.repositories.ArticleRepository;
+import kr.co.puerpuella.apitextssul.model.repositories.spec.ArticleSpecifications;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,42 +22,44 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class Art01ArticleListViewService extends CommonService {
+
+    private final ArticleRepository articleRepository;
     @Override
     protected CommonReturnData execute(CommonDTO... params) {
 
-        List<Art01SRArticle> articleList = new ArrayList<>();
+        Art01Request request = (Art01Request) params[0];
 
-        articleList.add(Art01SRArticle.builder()
-                .articleId(1)
-                .articleTitle("똘똘이의 모험")
-                .authorNick("똘똘이")
-                .authorUid(123141)
-                .categoryId(1)
-                .categoryNm("유머")
-                .articleTypeId(1)
-                .articleTypeNm("텍스트")
-                .viewCnt(321)
-                .likeCnt(22)
-                .commentCnt(2)
-                .thumbnailImageId(2)
-                .build());
-        articleList.add(Art01SRArticle.builder()
-                .articleId(2)
-                .articleTitle("똘똘이의 모험2")
-                .authorNick("똘똘이")
-                .authorUid(123141)
-                .categoryId(1)
-                .categoryNm("유머")
-                .articleTypeId(1)
-                .articleTypeNm("텍스트")
-                .viewCnt(321)
-                .likeCnt(22)
-                .commentCnt(2)
-                .thumbnailImageId(2)
-                .build());
+        Specification<Article> spec = Specification.where(ArticleSpecifications.withUserUid(request.getAutorUid()))
+                .and(ArticleSpecifications.withArticleType(ArticleType.resolve(request.getArticleTypeId()))
+                .and(ArticleSpecifications.withCategory(ArticleCategory.resolve(request.getCategoryId()))));
 
-        return Art01Response.builder().articleList(articleList).build();
+        List<Article> articles = articleRepository.findAll(spec);
+        //List<Article> articles = articleRepository.findAll();
+        Art01Response response = Art01Response.builder()
+                .articleList(articles.stream().map((article) -> Art01SRArticle.builder()
+                                .articleId(article.getArticleId())
+                                .articleTypeId(article.getArticleType().getTypeId())
+                                .articleTypeNm(article.getArticleType().getTypeName())
+                                .categoryId(article.getArticleCategory().getCategoryId())
+                                .categoryNm(article.getArticleCategory().getCategoryName())
+                                .articleTitle(article.getArticleTitle())
+                                .authorUid(article.getCreateUser().getUid())
+                                .authorNick(article.getCreateUser().getNickname())
+                                .viewCnt(article.getViewCnt())
+                                .likeCnt(article.getLikeMemberList().size())
+                                .commentCnt(article.getCommentList().size())
+                                .thumbnailImageId(0)
+                                .build()
+                        ).collect(
+
+                                ArrayList<Art01SRArticle>::new,
+                                ArrayList<Art01SRArticle>::add,
+                                ArrayList<Art01SRArticle>::addAll)
+                ).build();
+
+        return response;
 
     }
 }

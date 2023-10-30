@@ -16,23 +16,9 @@ public class ArticleController extends CommonController {
 
     @GetMapping("/articles")
     public ResponseEntity<ResponseBody> listArticle(
-            @RequestParam("offset") int offset,
-            @RequestParam("order") String order,
-            @RequestParam("limit") int limit,
-            @RequestParam("autorUid") int autorUid,
-            @RequestParam("articleTitle") String articleTitle,
-            @RequestParam("categoryId") int categoryId,
-            @RequestParam("articleTypeId") int articleTypeId
+            Art01Request request
     ) {
-        return execute(articleListViewService, Art01Request.builder()
-                    .offset(offset)
-                    .order(order)
-                    .limit(limit)
-                    .autorUid(autorUid)
-                    .articleTitle(articleTitle)
-                    .categoryId(categoryId)
-                    .articleTypeId(articleTypeId)
-                .build());
+        return execute(articleListViewService, request);
     }
 
 }

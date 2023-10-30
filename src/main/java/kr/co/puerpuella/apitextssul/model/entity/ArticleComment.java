@@ -11,7 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import java.util.Date;
 
 @Entity
-@Table(name="T_COMMENT")
+@Table(name="TB_COMMENT")
 @Getter
 @Builder
 @NoArgsConstructor
@@ -20,6 +20,7 @@ public class ArticleComment extends LabelEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "COMMENT_ID")
     private Long commentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
