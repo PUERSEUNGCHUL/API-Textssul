@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**
- * ARTICLE01
- */
 @Builder
 @Data
 @NoArgsConstructor
@@ -64,6 +61,19 @@ public class Art02Response extends CommonReturnData {
     private List<String> imagePathList;
 
     public void convertEntityToDto(Article article) {
+
+        this.articleId = article.getArticleId();
+        this.articleTitle = article.getArticleTitle();
+        this.authorUid = article.getCreateUser().getUid();
+        this.authorNick = article.getCreateUser().getNickname();
+        this.categoryId = article.getArticleCategory().getCategoryId();
+        this.categoryNm = article.getArticleCategory().getCategoryName();
+        this.articleTypeId = article.getArticleType().getTypeId();
+        this.articleTypeNm = article.getArticleType().getTypeName();
+        this.viewCnt = article.getViewCnt();
+        this.commentCnt = article.getCommentList().size();
+        this.likeCnt = article.getLikeMemberList().size();
+        this.content = article.getContent();
 
     }
 }

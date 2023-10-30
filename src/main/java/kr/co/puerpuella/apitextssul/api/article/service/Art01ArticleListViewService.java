@@ -21,6 +21,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 게시글 목록 조회 서비스
+ *
+ * 게시글 리소스로부터 전달된 파라미터의 검색조건에 적합한 리소스를 반환한다.
+ * see also
+ */
 @Service
 @RequiredArgsConstructor
 public class Art01ArticleListViewService extends CommonService {
@@ -31,14 +37,16 @@ public class Art01ArticleListViewService extends CommonService {
 
         Art01Request request = (Art01Request) params[0];
 
-        System.out.println(ArticleCategory.resolve(request.getCategoryId()));
-        System.out.println(request.getCategoryId());
+
+        // 게시글 검색 조건 설정
         Specification<Article> spec = Specification.where(ArticleSpecifications.withUserUid(request.getAuthorUid()))
                 .and(ArticleSpecifications.withArticleType(request.getArticleTypeId())
                 .and(ArticleSpecifications.withCategory(request.getCategoryId())));
 
+        // 검색조건과 함께 게시글 조회
         List<Article> articles = articleRepository.findAll(spec);
-        //List<Article> articles = articleRepository.findAll();
+        
+        // 검색결과를 Response형태로 변환
         Art01Response response = Art01Response.builder()
                 .articleList(articles.stream().map((article) -> Art01SRArticle.builder()
                                 .articleId(article.getArticleId())
@@ -55,7 +63,6 @@ public class Art01ArticleListViewService extends CommonService {
                                 .thumbnailImageId(0)
                                 .build()
                         ).collect(
-
                                 ArrayList<Art01SRArticle>::new,
                                 ArrayList<Art01SRArticle>::add,
                                 ArrayList<Art01SRArticle>::addAll)

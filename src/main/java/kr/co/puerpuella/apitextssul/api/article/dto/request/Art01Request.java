@@ -1,18 +1,15 @@
 package kr.co.puerpuella.apitextssul.api.article.dto.request;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
-
-/**
- * ARTICLE01
- */
 @Builder
 @Data
 public class Art01Request extends CommonDTO {
 
+    @Schema(description = "검색 시작 위치", nullable = false, example = "20", defaultValue = "20")
     /** 검색 시작 위치 */
     private Integer offset = 0;
 

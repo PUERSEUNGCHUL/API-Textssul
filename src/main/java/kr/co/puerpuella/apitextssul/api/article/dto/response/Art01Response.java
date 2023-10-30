@@ -6,12 +6,10 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * ARTICLE01
- */
 @Builder
 @Data
 public class Art01Response extends CommonReturnData {
 
+    /** 검색 게시글 목록 */
     private List<Art01SRArticle> articleList;
 }

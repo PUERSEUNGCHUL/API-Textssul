@@ -1,6 +1,5 @@
 package kr.co.puerpuella.apitextssul.api.article.dto.response;
 
-import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 import lombok.Builder;
 import lombok.Data;
 
@@ -47,6 +46,6 @@ public class Art01SRArticle{
     /** 썸네일 이미지 ID */
     private int thumbnailImageId;
 
-    /** 썸네일 이미지 바이트 */
+    /** 썸네일 이미지 주소 */
     private String thumbnailImagePath;
 }

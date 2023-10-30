@@ -9,6 +9,10 @@ import lombok.Data;
 @Builder
 public class Art03Request extends CommonDTO {
 
+    /**
+     * 요청파라미터를 Entity로 변경해주는 메서드
+     * @return
+     */
     public Article toEntity() {
 
         return new Article();

@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    Article findOneByArticleId(Long ArticleId);
+    Article findOneByArticleId(Integer ArticleId);
 
-    List<Article> findArticlesByCreateUserUid (Long uid);
+    List<Article> findArticlesByCreateUserUid (Integer uid);
 
     List<Article> findArticlesByArticleType(int articleTypeId);
 
