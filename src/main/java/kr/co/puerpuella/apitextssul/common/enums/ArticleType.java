@@ -13,7 +13,8 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 public enum ArticleType {
 
-    BASIC(1, "기본");
+    BASIC(1, "기본"),
+    ERROR(999, "에러용")
     ;
     private int typeId;
     private String typeName;
@@ -22,7 +23,7 @@ public enum ArticleType {
     @JsonCreator
     public static ArticleType resolve(Integer type) {
 
-        return Optional.ofNullable(CODE_MAP.get(type)).orElse(null);
+        return Optional.ofNullable(CODE_MAP.get(type)).orElse(ERROR);
     }
 
     public static ArticleType valueOf(Integer typeId) {

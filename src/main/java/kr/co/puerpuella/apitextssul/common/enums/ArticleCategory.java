@@ -14,7 +14,9 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 public enum ArticleCategory {
 
-    BASIC(1, "기본");
+    BASIC(1, "기본"),
+    ERROR(999, "에러용")
+    
     ;
     private int categoryId;
     private String categoryName;
@@ -24,7 +26,7 @@ public enum ArticleCategory {
     @JsonCreator
     public static ArticleCategory resolve(Integer type) {
 
-        return Optional.ofNullable(CODE_MAP.get(type)).orElse(null);
+        return Optional.ofNullable(CODE_MAP.get(type)).orElse(ERROR);
     }
 
     public static ArticleCategory valueOf(Integer categoryId) {

@@ -23,7 +23,7 @@ public class Art01Request extends CommonDTO {
     private Integer limit = 20;
 
     /** 검색조건(작성자) */
-    private Long autorUid;
+    private Integer authorUid;
 
     /** 검색조건(제목) */
     private String articleTitle;

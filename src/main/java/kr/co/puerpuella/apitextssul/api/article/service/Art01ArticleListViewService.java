@@ -31,9 +31,11 @@ public class Art01ArticleListViewService extends CommonService {
 
         Art01Request request = (Art01Request) params[0];
 
-        Specification<Article> spec = Specification.where(ArticleSpecifications.withUserUid(request.getAutorUid()))
-                .and(ArticleSpecifications.withArticleType(ArticleType.resolve(request.getArticleTypeId()))
-                .and(ArticleSpecifications.withCategory(ArticleCategory.resolve(request.getCategoryId()))));
+        System.out.println(ArticleCategory.resolve(request.getCategoryId()));
+        System.out.println(request.getCategoryId());
+        Specification<Article> spec = Specification.where(ArticleSpecifications.withUserUid(request.getAuthorUid()))
+                .and(ArticleSpecifications.withArticleType(request.getArticleTypeId())
+                .and(ArticleSpecifications.withCategory(request.getCategoryId())));
 
         List<Article> articles = articleRepository.findAll(spec);
         //List<Article> articles = articleRepository.findAll();

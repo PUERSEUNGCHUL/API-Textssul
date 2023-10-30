@@ -24,7 +24,7 @@ logging:
         data:
           jpa: DEBUG
       hibernate:
-        sql: DEBUG
+        sql: TRACE
     jpa: DEBUG
 
 jwt:
