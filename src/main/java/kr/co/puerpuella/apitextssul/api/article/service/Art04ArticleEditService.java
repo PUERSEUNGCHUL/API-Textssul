@@ -20,10 +20,6 @@ public class Art04ArticleEditService extends CommonService {
 
         Art03Request request = (Art03Request) params[0];
 
-        Article article = request.toEntity();
-
-        em.merge(article);
-
         return new CommonReturnData();
     }
 }

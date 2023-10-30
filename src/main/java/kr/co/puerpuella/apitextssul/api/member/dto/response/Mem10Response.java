@@ -1,4 +1,4 @@
-package kr.co.puerpuella.apitextssul.api.member.dto.result;
+package kr.co.puerpuella.apitextssul.api.member.dto.response;
 
 import kr.co.puerpuella.apitextssul.common.enums.Roles;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class MemberInfoDto extends CommonReturnData {
+public class Mem10Response extends CommonReturnData {
 
     //UID
     private Integer uid;

@@ -1,7 +1,7 @@
 package kr.co.puerpuella.apitextssul.api.member.service;
 
-import kr.co.puerpuella.apitextssul.api.member.dto.form.LoginForm;
-import kr.co.puerpuella.apitextssul.api.member.dto.result.LoginDto;
+import kr.co.puerpuella.apitextssul.api.member.dto.request.Mem14Request;
+import kr.co.puerpuella.apitextssul.api.member.dto.response.Mem14Response;
 import kr.co.puerpuella.apitextssul.common.enums.ErrorInfo;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class Mem14_LoginService extends CommonService implements UserDetailsService {
+public class Mem14LoginService extends CommonService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
@@ -41,7 +41,7 @@ public class Mem14_LoginService extends CommonService implements UserDetailsServ
     @Override
     protected CommonReturnData execute(CommonDTO... params) {
 
-        LoginForm loginForm = (LoginForm) params[0];
+        Mem14Request loginForm = (Mem14Request) params[0];
 
         Member savedMember = memberRepository.findOneByEmail(loginForm.getEmail());
 
@@ -63,7 +63,7 @@ public class Mem14_LoginService extends CommonService implements UserDetailsServ
         // 응답Header에 토큰 저장
         setTokenToHeader(accessToken);
 
-        return new LoginDto(accessToken);
+        return new Mem14Response(accessToken);
     }
 
     /**
@@ -72,7 +72,7 @@ public class Mem14_LoginService extends CommonService implements UserDetailsServ
      * @param savedMember
      * @return
      */
-    private String createAccessToken(LoginForm loginForm, Member savedMember) {
+    private String createAccessToken(Mem14Request loginForm, Member savedMember) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(savedMember.getUid(), loginForm.getPassword());
 
         Authentication authenticate = authenticationManagerBuilder.getObject().authenticate(authenticationToken);

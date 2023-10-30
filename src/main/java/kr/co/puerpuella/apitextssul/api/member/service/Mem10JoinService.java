@@ -1,8 +1,8 @@
 package kr.co.puerpuella.apitextssul.api.member.service;
 
 
-import kr.co.puerpuella.apitextssul.api.member.dto.result.MemberInfoDto;
-import kr.co.puerpuella.apitextssul.api.member.dto.form.JoinForm;
+import kr.co.puerpuella.apitextssul.api.member.dto.response.Mem10Response;
+import kr.co.puerpuella.apitextssul.api.member.dto.request.Mem10Request;
 import kr.co.puerpuella.apitextssul.common.enums.ErrorInfo;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-public class Mem10_JoinService extends CommonService {
+public class Mem10JoinService extends CommonService {
     
     /** 패스워드 암호화 모듈 */
     private final PasswordEncoder passwordEncoder;
@@ -33,7 +33,7 @@ public class Mem10_JoinService extends CommonService {
     public CommonReturnData execute(CommonDTO... params) {
 
 
-        JoinForm joinForm  = (JoinForm)params[0];
+        Mem10Request joinForm  = (Mem10Request)params[0];
 
         //닉네임 중복 체크
         if (checkDuplicateNickname(joinForm)) {
@@ -52,7 +52,7 @@ public class Mem10_JoinService extends CommonService {
 
         Member newMember = memberRepository.save(joinMember);
 
-        return MemberInfoDto.builder()
+        return Mem10Response.builder()
                 .uid(newMember.getUid())
                 .email(newMember.getEmail())
                 .nickname(newMember.getNickname())
@@ -61,13 +61,13 @@ public class Mem10_JoinService extends CommonService {
 
     }
 
-    private boolean checkDuplicateEmail(JoinForm joinForm) {
+    private boolean checkDuplicateEmail(Mem10Request joinForm) {
         Member joinedMember = memberRepository.findOneByEmail(joinForm.getEmail());
 
         return joinedMember != null;
     }
 
-    private boolean checkDuplicateNickname(JoinForm joinForm) {
+    private boolean checkDuplicateNickname(Mem10Request joinForm) {
         Member joinedMember = memberRepository.findOneByNickname(joinForm.getNickname());
 
         return joinedMember != null;

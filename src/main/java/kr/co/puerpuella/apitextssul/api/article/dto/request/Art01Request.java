@@ -9,25 +9,24 @@ import lombok.Data;
 @Data
 public class Art01Request extends CommonDTO {
 
-    @Schema(description = "검색 시작 위치", nullable = false, example = "20", defaultValue = "20")
-    /** 검색 시작 위치 */
-    private Integer offset = 0;
+    @Schema(description = "검색 시작 위치", nullable = false, example = "0", defaultValue = "0")
+    private Integer offset;
 
-    /** 정렬방식(asc, desc) */
-    private String order = "asc";
+    @Schema(description = "정렬방식", nullable = false, example = "asc", defaultValue = "asc")
+    private String order;
 
-    /** 표시 수 */
-    private Integer limit = 20;
+    @Schema(description = "표시 수 ", nullable = false, example = "20", defaultValue = "20")
+    private Integer limit;
 
-    /** 검색조건(작성자) */
+    @Schema(description = "검색조건(작성자)", nullable = true, example = "324222")
     private Integer authorUid;
 
-    /** 검색조건(제목) */
+    @Schema(description = "검색조건(제목)", nullable = true, example = "똘똘이")
     private String articleTitle;
 
-    /** 검색조건(카테고리) */
+    @Schema(description = "검색조건(카테고리)", nullable = true, example = "1")
     private Integer categoryId;
 
-    /** 검색조건(제목) */
+    @Schema(description = "검색조건(제목)", nullable = true, example = "1")
     private Integer articleTypeId;
 }

@@ -6,14 +6,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import kr.co.puerpuella.apitextssul.api.article.dto.request.Art01Request;
-import kr.co.puerpuella.apitextssul.api.article.dto.request.Art02Request;
-import kr.co.puerpuella.apitextssul.api.article.dto.response.Art01Response;
-import kr.co.puerpuella.apitextssul.api.article.dto.response.Art02Response;
-import kr.co.puerpuella.apitextssul.api.article.service.Art01ArticleListViewService;
-import kr.co.puerpuella.apitextssul.api.article.service.Art02ArticleViewService;
+import kr.co.puerpuella.apitextssul.api.article.dto.request.*;
+import kr.co.puerpuella.apitextssul.api.article.dto.response.*;
+import kr.co.puerpuella.apitextssul.api.article.service.*;
 import kr.co.puerpuella.apitextssul.common.framework.CommonController;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Fetch;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +24,12 @@ public class ArticleController extends CommonController {
     private final Art01ArticleListViewService articleListViewService;
 
     private final Art02ArticleViewService articleViewService;
+
+    private final Art03ArticleRegistService articleRegistService;
+
+    private final Art04ArticleEditService art04ArticleEditService;
+
+    private final Art05ArticleDeleteService articleDeleteService;
 
 
 
@@ -50,5 +54,42 @@ public class ArticleController extends CommonController {
     ) {
         return execute(articleViewService, Art02Request.builder().articleId(articleId).build());
     }
+
+    @Operation(summary = "게시글 신규 등록", description = "전달된 데이터를 게시글리소스에 저장한다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "등록 성공", content = @Content(mediaType = "application/json",schema = @Schema(implementation = Art03Response.class)))
+    })
+    @PostMapping("/articles")
+    public ResponseEntity<ResponseBody> registArticle(
+            @RequestBody Art03Request request
+            ) {
+        return execute(articleRegistService, request);
+    }
+
+    @Operation(summary = "게시글 수정", description = "전달된 데이터를 게시글 리소스로부터 수정한다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "수정 성공", content = @Content(mediaType = "application/json",schema = @Schema(implementation = Art04Response.class)))
+    })
+    @PatchMapping("/articles/{articleId}")
+    public ResponseEntity<ResponseBody> editArticle(
+            @PathVariable("articleId") Integer articleId,
+            @RequestBody Art04Request request
+    ) {
+        request.setArticleId(articleId);
+        return execute(art04ArticleEditService, request);
+    }
+
+    @Operation(summary = "게시글 삭제", description = "전달된 데이터를 게시글 리소스로부터 삭제한다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "삭제 성공", content = @Content(mediaType = "application/json",schema = @Schema(implementation = Art05Response.class)))
+    })
+    @DeleteMapping("/articles/{articleId}")
+    public ResponseEntity<ResponseBody> deleteArticle(
+            @PathVariable("articleId") Integer articleId
+    ) {
+        return execute(articleDeleteService, Art05Request.builder().articleId(articleId).build());
+    }
+
+
 
 }
