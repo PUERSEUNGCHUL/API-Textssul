@@ -1,7 +1,5 @@
 package kr.co.puerpuella.apitextssul.api.article.service;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import kr.co.puerpuella.apitextssul.api.article.dto.request.Art03Request;
 import kr.co.puerpuella.apitextssul.api.article.dto.response.Art03Response;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
@@ -10,13 +8,12 @@ import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 import kr.co.puerpuella.apitextssul.common.util.SecurityUtil;
 import kr.co.puerpuella.apitextssul.model.entity.Article;
 import kr.co.puerpuella.apitextssul.model.repositories.ArticleRepository;
-import kr.co.puerpuella.apitextssul.model.repositories.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class Art03ArticleRegistService extends CommonService {
+public class Art03ArticleRegistryService extends CommonService {
 
 
     private final ArticleRepository articleRepository;

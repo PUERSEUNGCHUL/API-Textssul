@@ -7,8 +7,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.co.puerpuella.apitextssul.api.article.dto.response.Art01Response;
+import kr.co.puerpuella.apitextssul.api.article.dto.response.Art02Response;
 import kr.co.puerpuella.apitextssul.api.comment.dto.request.Cmt06Request;
+import kr.co.puerpuella.apitextssul.api.comment.dto.request.Cmt07Request;
 import kr.co.puerpuella.apitextssul.api.comment.service.Cmt06CommentListViewService;
+import kr.co.puerpuella.apitextssul.api.comment.service.Cmt07CommentRegistryService;
 import kr.co.puerpuella.apitextssul.common.framework.CommonController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +23,32 @@ import org.springframework.web.bind.annotation.*;
 public class ArticleCommentController extends CommonController {
 
     private final Cmt06CommentListViewService commentListViewService;
+
+    private final Cmt07CommentRegistryService commentRegistryService;
     
     @Operation(summary = "댓글 목록 조회", description = "댓글 리소스에서 전달된 조건에 맞는 댓글리소스를 취합하여 전달합니다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "조회 성공", content = @Content(mediaType = "application/json",schema = @Schema(implementation = Art01Response.class)))
     })
-    @GetMapping("/v1/api/comments/{articleId}")
+    @GetMapping("/v1/api/articles/{articleId}/comments")
     public ResponseEntity<ResponseBody> listComments(
             @PathVariable("articleId") Integer articleId,
             Cmt06Request request
     ) {
         request.setArticleId(articleId);
         return execute(commentListViewService, request);
+    }
+
+    @Operation(summary = "댓글 작성", description = "댓글 리소스에 새로운 댓글을 등록합니다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "조회 성공", content = @Content(mediaType = "application/json",schema = @Schema(implementation = Art02Response.class)))
+    })
+    @PostMapping("/v1/api/articles/{articleId}/comments")
+    public ResponseEntity<ResponseBody> registryComment(
+            @PathVariable("articleId") Integer articleId,
+            @RequestBody Cmt07Request request
+    ) {
+        request.setArticleId(articleId);
+        return execute(commentRegistryService, request);
     }
 }

@@ -25,7 +25,7 @@ public class ArticleController extends CommonController {
 
     private final Art02ArticleViewService articleViewService;
 
-    private final Art03ArticleRegistService articleRegistService;
+    private final Art03ArticleRegistryService articleRegistService;
 
     private final Art04ArticleEditService art04ArticleEditService;
 
