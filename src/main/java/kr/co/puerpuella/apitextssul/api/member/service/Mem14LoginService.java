@@ -5,7 +5,7 @@ import kr.co.puerpuella.apitextssul.api.member.dto.response.Mem14Response;
 import kr.co.puerpuella.apitextssul.common.enums.ErrorInfo;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
-import kr.co.puerpuella.apitextssul.common.framework.exception.ValidationException;
+import kr.co.puerpuella.apitextssul.common.framework.exception.ApplicationException;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 import kr.co.puerpuella.apitextssul.model.entity.Member;
 import kr.co.puerpuella.apitextssul.model.repositories.MemberRepository;
@@ -48,13 +48,13 @@ public class Mem14LoginService extends CommonService implements UserDetailsServi
         //가입되어 있는 회원인지 체크
         if (savedMember == null) {
 
-            throw new ValidationException(ErrorInfo.LOGIN_NO_EMAIL);
+            throw new ApplicationException(ErrorInfo.LOGIN_NO_EMAIL);
         }
 
         //패스워드 확인
         if (!passwordEncoder.matches(loginForm.getPassword(), savedMember.getPassword())){
 
-            throw new ValidationException(ErrorInfo.LOGIN_INVALID_PASSWORD);
+            throw new ApplicationException(ErrorInfo.LOGIN_INVALID_PASSWORD);
         }
 
         // 신규 액세스토큰 발급

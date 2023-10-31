@@ -1,7 +1,7 @@
 package kr.co.puerpuella.apitextssul.common.framework;
 
 
-import kr.co.puerpuella.apitextssul.common.framework.exception.ValidationException;
+import kr.co.puerpuella.apitextssul.common.framework.exception.ApplicationException;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 import kr.co.puerpuella.apitextssul.common.framework.response.ResponseBody;
 import kr.co.puerpuella.apitextssul.common.framework.response.ResponseInfo;
@@ -47,7 +47,7 @@ public class CommonController {
                     .build();
 
             return ResponseEntity.ok().body(responseBody);
-        } catch (ValidationException e) {
+        } catch (ApplicationException e) {
             // 서비스의 실행중 ValidationException이 발생한경우 (입력받은 Form데이터가 서비스실행의 문제가 되는 경우 발생한다.)
 
             // 에러정보를 ResponseBody로 감싼다.

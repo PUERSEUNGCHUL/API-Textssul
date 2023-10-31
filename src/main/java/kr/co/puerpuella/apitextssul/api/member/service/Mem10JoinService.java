@@ -6,7 +6,7 @@ import kr.co.puerpuella.apitextssul.api.member.dto.request.Mem10Request;
 import kr.co.puerpuella.apitextssul.common.enums.ErrorInfo;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
-import kr.co.puerpuella.apitextssul.common.framework.exception.ValidationException;
+import kr.co.puerpuella.apitextssul.common.framework.exception.ApplicationException;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 import kr.co.puerpuella.apitextssul.model.entity.Member;
 import kr.co.puerpuella.apitextssul.model.repositories.MemberRepository;
@@ -37,12 +37,12 @@ public class Mem10JoinService extends CommonService {
 
         //닉네임 중복 체크
         if (checkDuplicateNickname(joinForm)) {
-            throw new ValidationException(ErrorInfo.JOIN_DUPLICATED_NICKNAME);
+            throw new ApplicationException(ErrorInfo.JOIN_DUPLICATED_NICKNAME);
         }
 
         //이메일 중복 체크
         if (checkDuplicateEmail(joinForm)) {
-            throw new ValidationException(ErrorInfo.JOIN_DUPLICATED_EMAIL);
+            throw new ApplicationException(ErrorInfo.JOIN_DUPLICATED_EMAIL);
         }
 
         // 회원가입하려는 멤버의 패스워드 암호화

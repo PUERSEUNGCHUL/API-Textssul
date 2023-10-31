@@ -1,14 +1,16 @@
 package kr.co.puerpuella.apitextssul.common.util;
 
 
+import jakarta.servlet.http.HttpServletResponse;
 import kr.co.puerpuella.apitextssul.common.enums.ErrorInfo;
-import kr.co.puerpuella.apitextssul.common.framework.exception.ValidationException;
+import kr.co.puerpuella.apitextssul.common.framework.exception.ApplicationException;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Slf4j
@@ -21,7 +23,7 @@ public class SecurityUtil {
 
         if (authentication == null) {
             log.debug("Security Context에 인증정보가 없습니다.");
-            new ValidationException(ErrorInfo.TOKEN_NO_USER);
+            new ApplicationException(ErrorInfo.TOKEN_NO_USER);
         }
 
         String uid = null;
@@ -34,12 +36,26 @@ public class SecurityUtil {
         }
 
         try {
-            String uidStr = Optional.ofNullable(uid).orElseThrow(()->new ValidationException(ErrorInfo.TOKEN_NO_USER));
+            String uidStr = Optional.ofNullable(uid).orElseThrow(()->new ApplicationException(ErrorInfo.TOKEN_NO_USER));
 
             return Integer.parseInt(uidStr);
         } catch (NumberFormatException e) {
-            throw new ValidationException(ErrorInfo.TOKEN_INVALID_USER);
+            throw new ApplicationException(ErrorInfo.TOKEN_INVALID_USER);
         }
     }
 
+    public static void setResponse(HttpServletResponse response, ErrorInfo errorInfo) throws IOException {
+        response.setContentType("application/json;charset=UTF-8");
+        response.setStatus(errorInfo.errorCode);
+        response.getWriter().println("{ \"responseData\" : {},"
+                + "\"responseInfo\" : {"
+                + "\"responseCode\" : " + errorInfo.errorCode + ","
+                + "\"responseMsg\" : \"" + errorInfo.errorMessage + "\""
+                + "}");
+    }
+
+    public static String getUserIP() {
+
+        return "127.0.0.1";
+    }
 }

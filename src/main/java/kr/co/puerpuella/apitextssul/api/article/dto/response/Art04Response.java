@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class Art04Response extends CommonReturnData {
 
-    
+    /** 게시글 ID */
+    private int articleId;
 }

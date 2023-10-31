@@ -7,6 +7,7 @@ import kr.co.puerpuella.apitextssul.api.article.dto.response.Art03Response;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
+import kr.co.puerpuella.apitextssul.common.util.SecurityUtil;
 import kr.co.puerpuella.apitextssul.model.entity.Article;
 import kr.co.puerpuella.apitextssul.model.repositories.ArticleRepository;
 import kr.co.puerpuella.apitextssul.model.repositories.MemberRepository;
@@ -24,6 +25,8 @@ public class Art03ArticleRegistService extends CommonService {
     protected CommonReturnData execute(CommonDTO... params) {
 
         Art03Request request = (Art03Request) params[0];
+
+        request.setAuthorUid(SecurityUtil.getCurrentUserId());
 
         Article newArticle = articleRepository.save(request.toEntity());
 

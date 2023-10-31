@@ -5,6 +5,7 @@ import kr.co.puerpuella.apitextssul.common.enums.ArticleCategory;
 import kr.co.puerpuella.apitextssul.common.enums.ArticleType;
 import kr.co.puerpuella.apitextssul.common.enums.convertor.ArticleCategoryConvertor;
 import kr.co.puerpuella.apitextssul.common.enums.convertor.ArticleTypeConvertor;
+import kr.co.puerpuella.apitextssul.common.util.SecurityUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -66,5 +67,18 @@ public class Article extends LabelEntity{
     @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
     @Comment("댓글 목록")
     private List<ArticleComment> commentList = new ArrayList<>();
+
+    public void update(String articleTitle, int categoryId, int articleTypeId, String articleContent) {
+
+        this.articleTitle = articleTitle;
+        this.articleCategory = ArticleCategory.resolve(categoryId);
+        this.articleType = ArticleType.resolve(articleTypeId);
+        this.content = articleContent;
+
+        super.setUpdateDate(new Date());
+        super.setUpdateUser(Member.builder().uid(SecurityUtil.getCurrentUserId()).build());
+        super.setUpdateIP(SecurityUtil.getUserIP());
+    }
+
 
 }

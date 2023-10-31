@@ -58,10 +58,10 @@ public class SecurityConfig {
 
                     authorizeHttpRequests.requestMatchers(new AntPathRequestMatcher("/h2/**")).permitAll();
 
-                    authorizeHttpRequests.requestMatchers(HttpMethod.GET, "/v1/api/articles").permitAll();
-                    authorizeHttpRequests.requestMatchers(HttpMethod.POST, "/v1/api/articles").authenticated();
-                    authorizeHttpRequests.requestMatchers(HttpMethod.PATCH, "/v1/api/articles").authenticated();
-                    authorizeHttpRequests.requestMatchers(HttpMethod.DELETE, "/v1/api/articles").authenticated();
+                    authorizeHttpRequests.requestMatchers(HttpMethod.GET, "/v1/api/articles/**").permitAll();
+                    authorizeHttpRequests.requestMatchers(HttpMethod.POST, "/v1/api/articles/**").authenticated();
+                    authorizeHttpRequests.requestMatchers(HttpMethod.PATCH, "/v1/api/articles/**").authenticated();
+                    authorizeHttpRequests.requestMatchers(HttpMethod.DELETE, "/v1/api/articles/**").authenticated();
 
                     authorizeHttpRequests
                             .requestMatchers(new MvcRequestMatcher(introspector, "/v1/api/articles")).permitAll();
