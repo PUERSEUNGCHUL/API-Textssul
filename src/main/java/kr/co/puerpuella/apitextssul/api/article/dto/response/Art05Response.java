@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class Art05Response extends CommonReturnData {
 
+    private Integer articleId;
     
 }
