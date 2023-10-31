@@ -71,10 +71,7 @@ public class ArticleController extends CommonController {
     public ResponseEntity<ResponseBody> registArticle(
             @RequestBody Art03Request request
             ) {
-        String uidStr = SecurityUtil.getCurrentUserId().orElseThrow(()->{
-            return new ValidationException(ErrorInfo.MEMBER_NO_USER);
-        });
-        request.setAuthorUid(Integer.parseInt(uidStr));
+        request.setAuthorUid(SecurityUtil.getCurrentUserId());
         return execute(articleRegistService, request);
     }
 

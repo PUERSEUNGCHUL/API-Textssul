@@ -10,7 +10,6 @@ public enum ErrorInfo {
     LOGIN_NO_EMAIL(2001, "가입되어 있지 않은 메일입니다."),
     LOGIN_INVALID_PASSWORD(2002, "패스워드가 일치하지 않습니다."),
 
-    MEMBER_NO_USER(2003, "존재하지 않는 유저입니다."),
 
     SECURITY_INVALID_AUTHORIZED(3001, "로그인되어있지 않습니다."),
     SECURITY_ACCESS_DENIED(3002,"액세스가 거부되었습니다."),
@@ -20,6 +19,10 @@ public enum ErrorInfo {
     SECURITY_INVALID_TOKEN(3014,"JWT 토큰이 잘못되었습니다."),
     SECURITY_NO_TOKEN(3015,"JWT 토큰이 존재하지 않습니다."),
     SECURITY_NO_MATCH_REFRESH_TOKEN(3020,"유효하지 않은 Refresh토큰입니다."),
+
+
+    TOKEN_NO_USER(4001, "존재하지 않는 유저입니다."),
+    TOKEN_INVALID_USER(4002, "유효하지 않은 UID입니다"),
 
     ARTICLE_NO_RESOURCE(4001, "게시글이 존재하지 않습니다."),
 
