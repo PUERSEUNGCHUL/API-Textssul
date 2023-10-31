@@ -1,8 +1,7 @@
 package kr.co.puerpuella.apitextssul.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -13,7 +12,7 @@ import java.util.Date;
  * 테이블 공통 항목
  */
 @MappedSuperclass
-@Getter
+@Data
 public class LabelEntity implements Serializable {
 
     /** 작성자 */

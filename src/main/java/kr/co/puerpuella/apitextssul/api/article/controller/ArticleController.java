@@ -9,7 +9,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.co.puerpuella.apitextssul.api.article.dto.request.*;
 import kr.co.puerpuella.apitextssul.api.article.dto.response.*;
 import kr.co.puerpuella.apitextssul.api.article.service.*;
+import kr.co.puerpuella.apitextssul.common.enums.ErrorInfo;
 import kr.co.puerpuella.apitextssul.common.framework.CommonController;
+import kr.co.puerpuella.apitextssul.common.framework.exception.ValidationException;
+import kr.co.puerpuella.apitextssul.common.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.springframework.data.domain.Pageable;
@@ -68,6 +71,10 @@ public class ArticleController extends CommonController {
     public ResponseEntity<ResponseBody> registArticle(
             @RequestBody Art03Request request
             ) {
+        String uidStr = SecurityUtil.getCurrentUserId().orElseThrow(()->{
+            return new ValidationException(ErrorInfo.MEMBER_NO_USER);
+        });
+        request.setAuthorUid(Integer.parseInt(uidStr));
         return execute(articleRegistService, request);
     }
 
@@ -94,7 +101,4 @@ public class ArticleController extends CommonController {
     ) {
         return execute(articleDeleteService, Art05Request.builder().articleId(articleId).build());
     }
-
-
-
 }

@@ -10,6 +10,8 @@ public enum ErrorInfo {
     LOGIN_NO_EMAIL(2001, "가입되어 있지 않은 메일입니다."),
     LOGIN_INVALID_PASSWORD(2002, "패스워드가 일치하지 않습니다."),
 
+    MEMBER_NO_USER(2003, "존재하지 않는 유저입니다."),
+
     SECURITY_INVALID_AUTHORIZED(3001, "로그인되어있지 않습니다."),
     SECURITY_ACCESS_DENIED(3002,"액세스가 거부되었습니다."),
     SECURITY_INVALID_SIGN(3011,"잘못된 JWT 서명입니다."),

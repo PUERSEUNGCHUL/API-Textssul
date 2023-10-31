@@ -13,5 +13,7 @@ import java.util.List;
 @Data
 public class Art03Response extends CommonReturnData {
 
+    /** 게시글 ID */
+    private int articleId;
 
 }

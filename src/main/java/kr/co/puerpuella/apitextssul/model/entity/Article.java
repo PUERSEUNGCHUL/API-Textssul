@@ -67,5 +67,4 @@ public class Article extends LabelEntity{
     @Comment("댓글 목록")
     private List<ArticleComment> commentList = new ArrayList<>();
 
-
 }
