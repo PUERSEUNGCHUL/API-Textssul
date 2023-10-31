@@ -3,6 +3,8 @@ package kr.co.puerpuella.apitextssul.api.article.dto.response;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * ARTICLE01
  */
@@ -48,4 +50,6 @@ public class Art01SRArticle{
 
     /** 썸네일 이미지 주소 */
     private String thumbnailImagePath;
+
+    private Date createDt;
 }

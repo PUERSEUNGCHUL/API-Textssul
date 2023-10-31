@@ -1,16 +1,15 @@
 package kr.co.puerpuella.apitextssul.api.comment.service;
 
-import kr.co.puerpuella.apitextssul.api.article.dto.request.Art01Request;
-import kr.co.puerpuella.apitextssul.api.article.dto.response.Art01Response;
 import kr.co.puerpuella.apitextssul.api.article.dto.response.Art01SRArticle;
 import kr.co.puerpuella.apitextssul.api.comment.dto.request.Cmt06Request;
 import kr.co.puerpuella.apitextssul.api.comment.dto.response.Cmt06Response;
+import kr.co.puerpuella.apitextssul.api.comment.dto.response.Cmt06SRComment;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
-import kr.co.puerpuella.apitextssul.model.entity.Article;
-import kr.co.puerpuella.apitextssul.model.repositories.ArticleRepository;
-import kr.co.puerpuella.apitextssul.model.repositories.spec.ArticleSpecifications;
+import kr.co.puerpuella.apitextssul.model.entity.ArticleComment;
+import kr.co.puerpuella.apitextssul.model.repositories.ArticleCommentRepository;
+import kr.co.puerpuella.apitextssul.model.repositories.spec.ArticleCommentSpecifications;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -28,16 +27,29 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Cmt06CommentListViewService extends CommonService {
 
-    private final ArticleRepository articleRepository;
+    private final ArticleCommentRepository articleCommentRepository;
     @Override
     protected CommonReturnData execute(CommonDTO... params) {
 
         Cmt06Request request = (Cmt06Request) params[0];
 
+        // 답변 검색 조건 설정
+        Specification<ArticleComment> spec = Specification.where(ArticleCommentSpecifications.withUserUid(request.getAuthorUid()))
+                .and(ArticleCommentSpecifications.withArticleId(request.getArticleId()));
 
-        Cmt06Response response = new Cmt06Response();
-
-        return response;
+        return Cmt06Response.builder().commentList(articleCommentRepository.findAll(spec).stream().map((ac) ->
+            Cmt06SRComment.builder()
+                            .articleId(ac.getArticle().getArticleId())
+                            .commentId(ac.getCommentId())
+                            .comment(ac.getComment())
+                            .authorUid(ac.getCreateUser().getUid())
+                            .authorNick(ac.getCreateUser().getNickname())
+                            .createDt(ac.getCreateDate())
+                    .build()
+        ).collect(
+                ArrayList<Cmt06SRComment>::new,
+                ArrayList<Cmt06SRComment>::add,
+                ArrayList<Cmt06SRComment>::addAll)).build();
 
     }
 }

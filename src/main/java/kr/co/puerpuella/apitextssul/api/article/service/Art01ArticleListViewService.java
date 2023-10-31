@@ -65,6 +65,7 @@ public class Art01ArticleListViewService extends CommonService {
                                 .likeCnt(article.getLikeMemberList().size())
                                 .commentCnt(article.getCommentList().size())
                                 .thumbnailImageId(0)
+                                .createDt(article.getCreateDate())
                                 .build()
                         ).collect(
                                 ArrayList<Art01SRArticle>::new,

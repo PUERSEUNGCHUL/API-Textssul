@@ -13,6 +13,6 @@ public class Cmt06Request extends CommonDTO {
     private Integer articleId;
 
     @Schema(description = "작성자 UID", nullable = true, example = "0", defaultValue = "0")
-    private Integer uid;
+    private Integer authorUid;
 
 }
