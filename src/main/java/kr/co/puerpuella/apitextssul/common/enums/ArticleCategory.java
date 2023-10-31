@@ -14,7 +14,9 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 public enum ArticleCategory {
 
-    BASIC(1, "기본"),
+    BASIC(1, "일반"),
+    HUMOR(2, "유머"),
+    POLITICS(3, "정치"),
     ERROR(999, "에러용")
     
     ;

@@ -12,6 +12,7 @@ import kr.co.puerpuella.apitextssul.api.article.service.*;
 import kr.co.puerpuella.apitextssul.common.framework.CommonController;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.Fetch;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,8 +40,12 @@ public class ArticleController extends CommonController {
     })
     @GetMapping("/articles")
     public ResponseEntity<ResponseBody> listArticles(
-            Art01Request request
+            Art01Request request,
+            Pageable pageable
     ) {
+
+        request.setPageable(pageable);
+
         return execute(articleListViewService, request);
     }
 

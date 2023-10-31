@@ -19,6 +19,8 @@ public enum ErrorInfo {
     SECURITY_NO_TOKEN(3015,"JWT 토큰이 존재하지 않습니다."),
     SECURITY_NO_MATCH_REFRESH_TOKEN(3020,"유효하지 않은 Refresh토큰입니다."),
 
+    ARTICLE_NO_RESOURCE(4001, "게시글이 존재하지 않습니다."),
+
     ;
 
     public int errorCode;
