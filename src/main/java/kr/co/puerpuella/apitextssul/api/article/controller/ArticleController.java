@@ -43,8 +43,6 @@ public class ArticleController extends CommonController {
             Pageable pageable
     ) {
 
-        request.setPageable(pageable);
-
         return execute(articleListViewService, request);
     }
 
