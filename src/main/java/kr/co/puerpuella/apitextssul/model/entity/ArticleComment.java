@@ -1,6 +1,9 @@
 package kr.co.puerpuella.apitextssul.model.entity;
 
 import jakarta.persistence.*;
+import kr.co.puerpuella.apitextssul.common.enums.ArticleCategory;
+import kr.co.puerpuella.apitextssul.common.enums.ArticleType;
+import kr.co.puerpuella.apitextssul.common.util.SecurityUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,4 +32,13 @@ public class ArticleComment extends LabelEntity{
 
     @Column(name="COMMENT")
     private String comment;
+
+    public void update(String comment) {
+
+        this.comment = comment;
+
+        super.setUpdateDate(new Date());
+        super.setUpdateUser(Member.builder().uid(SecurityUtil.getCurrentUserId()).build());
+        super.setUpdateIP(SecurityUtil.getUserIP());
+    }
 }
