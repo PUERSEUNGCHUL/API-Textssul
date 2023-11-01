@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 게시글 목록 조회 서비스
+ * 답변 목록 조회 서비스
  *
- * 게시글 리소스로부터 전달된 파라미터의 검색조건에 적합한 리소스를 반환한다.
+ * 답변 리소스로부터 전달된 파라미터의 검색조건에 적합한 리소스를 반환한다.
  * see also
  */
 @Service

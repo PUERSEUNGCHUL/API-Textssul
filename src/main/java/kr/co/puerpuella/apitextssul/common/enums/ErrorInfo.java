@@ -31,7 +31,9 @@ public enum ErrorInfo {
 
     ARTICLE_NO_MATCH_USER(4002, "게시글 작성자와 로그인한 유저가 동일하지 않습니다."),
 
-    COMMENT_NO_RESOURCE(5001, "답변글이 존재하지 않습니다.")
+    COMMENT_NO_RESOURCE(5001, "답변글이 존재하지 않습니다."),
+
+    COMMENT_NO_MATCH_USER(5002, "답변 작성자와 로그인한 유저가 동일하지 않습니다."),
 
     ;
 

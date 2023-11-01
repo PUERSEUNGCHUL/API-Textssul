@@ -1,9 +1,9 @@
 package kr.co.puerpuella.apitextssul.api.comment.service;
 
-import jakarta.validation.ValidationException;
 import kr.co.puerpuella.apitextssul.api.comment.dto.request.Cmt08Request;
-import kr.co.puerpuella.apitextssul.api.comment.dto.response.Cmt07Response;
+import kr.co.puerpuella.apitextssul.api.comment.dto.request.Cmt09Request;
 import kr.co.puerpuella.apitextssul.api.comment.dto.response.Cmt08Response;
+import kr.co.puerpuella.apitextssul.api.comment.dto.response.Cmt09Response;
 import kr.co.puerpuella.apitextssul.common.enums.ErrorInfo;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
@@ -16,19 +16,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
- * 답변 수정 서비스
+ * 답변 삭제 서비스
  *
  * see also
  */
 @Service
 @RequiredArgsConstructor
-public class Cmt08CommentEditService extends CommonService {
+public class Cmt09CommentDeleteService extends CommonService {
 
     private final ArticleCommentRepository articleCommentRepository;
     @Override
     protected CommonReturnData execute(CommonDTO... params) {
 
-        Cmt08Request request = (Cmt08Request) params[0];
+        Cmt09Request request = (Cmt09Request) params[0];
 
         ArticleComment articleComment = articleCommentRepository.findById(request.getCommentId()).orElseThrow(()->new ApplicationException(ErrorInfo.SECURITY_EXPIRED_TOKEN.COMMENT_NO_RESOURCE));
 
@@ -38,10 +38,8 @@ public class Cmt08CommentEditService extends CommonService {
             throw new ApplicationException(ErrorInfo.COMMENT_NO_MATCH_USER);
         }
 
-        articleComment.update(request.getComment());
-
-        ArticleComment newArticleComment = articleCommentRepository.save(articleComment);
-        return Cmt08Response.builder().articleId(newArticleComment.getArticle().getArticleId()).commentId(newArticleComment.getCommentId()).build();
+        articleCommentRepository.delete(articleComment);
+        return Cmt09Response.builder().build();
 
     }
 }
