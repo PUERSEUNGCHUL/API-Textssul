@@ -13,9 +13,9 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 public enum ArticleType {
 
-    BASIC(1, "일반"),
-    IMAGE(2, "이미지"),
-    MULTI(3, "복합"),
+    TEXT(1, "게시글"),
+    VOTE(2, "인기투표"),
+    VOTE_BOTH(3, "찬반결정"),
     ERROR(999, "에러용")
     ;
     private int typeId;
