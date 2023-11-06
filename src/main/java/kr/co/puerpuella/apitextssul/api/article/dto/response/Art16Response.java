@@ -12,5 +12,7 @@ public class Art16Response extends CommonReturnData {
     private int articleId;
 
     private int likeType;
+
+    private int likeCnt;
     
 }

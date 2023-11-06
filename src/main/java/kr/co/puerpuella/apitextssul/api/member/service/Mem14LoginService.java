@@ -101,7 +101,7 @@ public class Mem14LoginService extends CommonService implements UserDetailsServi
     @Override
     public UserDetails loadUserByUsername(String uid) throws UsernameNotFoundException {
 
-        Member member = memberRepository.findOneByUid(Long.parseLong(uid));
+        Member member = memberRepository.findOneByUid(Integer.parseInt(uid));
 
         return new User(member.getUid().toString(),member.getPassword(), member.getAuthorities());
     }

@@ -7,13 +7,17 @@ import kr.co.puerpuella.apitextssul.model.entity.Article;
 import kr.co.puerpuella.apitextssul.model.entity.ArticleComment;
 import kr.co.puerpuella.apitextssul.model.entity.Member;
 import kr.co.puerpuella.apitextssul.model.repositories.ArticleCommentRepository;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cmt07Request extends CommonDTO {
 
 

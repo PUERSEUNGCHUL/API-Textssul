@@ -53,4 +53,9 @@ public class Member extends LabelEntity{
 
         return collect;
     }
+
+    @Override
+    public int hashCode() {
+        return this.uid;
+    }
 }
