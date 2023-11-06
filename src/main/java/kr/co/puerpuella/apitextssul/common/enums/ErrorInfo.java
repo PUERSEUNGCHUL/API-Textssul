@@ -35,6 +35,9 @@ public enum ErrorInfo {
 
     COMMENT_NO_MATCH_USER(5002, "답변 작성자와 로그인한 유저가 동일하지 않습니다."),
 
+    LIKE_NO_ARTICLE(6001, ""),
+    LIKE_NO_TYPE(6002, "좋아요구분은 1(좋아요), 0(좋아요 취소)만 가능합니다.")
+
     ;
 
 

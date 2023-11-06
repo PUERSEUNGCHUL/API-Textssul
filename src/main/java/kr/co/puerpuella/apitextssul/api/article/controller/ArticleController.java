@@ -27,9 +27,11 @@ public class ArticleController extends CommonController {
 
     private final Art03ArticleRegistryService articleRegistService;
 
-    private final Art04ArticleEditService art04ArticleEditService;
+    private final Art04ArticleEditService articleEditService;
 
     private final Art05ArticleDeleteService articleDeleteService;
+
+    private final Art16LikeToggleService likeToggleService;
 
 
 
@@ -78,7 +80,7 @@ public class ArticleController extends CommonController {
             @RequestBody Art04Request request
     ) {
         request.setArticleId(articleId);
-        return execute(art04ArticleEditService, request);
+        return execute(articleEditService, request);
     }
 
     @Operation(summary = "게시글 삭제", description = "전달된 데이터를 게시글 리소스로부터 삭제한다.")
@@ -101,6 +103,6 @@ public class ArticleController extends CommonController {
             @PathVariable("articleId") Integer articleId,
             @PathVariable("likeType") Integer likeType
     ) {
-        return execute(articleDeleteService, Art16Request.builder().articleId(articleId).likeType(likeType).build());
+        return execute(likeToggleService, Art16Request.builder().articleId(articleId).likeType(likeType).build());
     }
 }
