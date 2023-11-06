@@ -80,5 +80,9 @@ public class Article extends LabelEntity{
         super.setUpdateIP(SecurityUtil.getUserIP());
     }
 
+    public void addViewCnt() {
+        this.viewCnt++;
+    }
+
 
 }

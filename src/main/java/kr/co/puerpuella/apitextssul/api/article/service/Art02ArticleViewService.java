@@ -36,6 +36,10 @@ public class Art02ArticleViewService extends CommonService {
             throw new ApplicationException(ErrorInfo.ARTICLE_NO_RESOURCE);
         }
 
+        article.addViewCnt();
+
+        articleRepository.save(article);
+
         response.convertEntityToDto(articleRepository.findOneByArticleId(request.getArticleId()));
 
         return response;
