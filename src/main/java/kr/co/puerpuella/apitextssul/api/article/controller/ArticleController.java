@@ -91,4 +91,16 @@ public class ArticleController extends CommonController {
     ) {
         return execute(articleDeleteService, Art05Request.builder().articleId(articleId).build());
     }
+
+    @Operation(summary = "게시글 좋아요 기능", description = "게시글 리소스에 좋아요를 추가/삭제한다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "게시글 좋아요 토글 성공", content = @Content(mediaType = "application/json",schema = @Schema(implementation = Art16Response.class)))
+    })
+    @PatchMapping("/articles/{articleId}/{likeType}")
+    public ResponseEntity<ResponseBody> likeArticle(
+            @PathVariable("articleId") Integer articleId,
+            @PathVariable("likeType") Integer likeType
+    ) {
+        return execute(articleDeleteService, Art16Request.builder().articleId(articleId).likeType(likeType).build());
+    }
 }
