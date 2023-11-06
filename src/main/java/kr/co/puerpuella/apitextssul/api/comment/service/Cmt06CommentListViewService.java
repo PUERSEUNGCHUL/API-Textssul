@@ -45,6 +45,7 @@ public class Cmt06CommentListViewService extends CommonService {
                             .authorUid(ac.getCreateUser().getUid())
                             .authorNick(ac.getCreateUser().getNickname())
                             .createDt(ac.getCreateDate())
+                            .likeCnt(ac.getLikeMemberList().size())
                     .build()
         ).collect(
                 ArrayList<Cmt06SRComment>::new,

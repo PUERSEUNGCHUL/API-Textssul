@@ -21,4 +21,6 @@ public class Cmt06SRComment {
 
     private Date createDt;
 
+    private int likeCnt;
+
 }
