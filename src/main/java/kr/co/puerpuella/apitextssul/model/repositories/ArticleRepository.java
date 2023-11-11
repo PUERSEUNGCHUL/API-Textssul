@@ -2,6 +2,7 @@ package kr.co.puerpuella.apitextssul.model.repositories;
 
 import kr.co.puerpuella.apitextssul.model.entity.Article;
 import kr.co.puerpuella.apitextssul.model.entity.Member;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +19,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     List<Article> findArticlesByArticleCategory(int categoryId);
 
-    List<Article> findAll(Specification<Article> spec, Pageable pageable);
+    Page<Article> findAll(Specification<Article> spec, Pageable pageable);
 
 }
