@@ -30,7 +30,7 @@ public class Cmt09CommentDeleteService extends CommonService {
 
         Cmt09Request request = (Cmt09Request) params[0];
 
-        ArticleComment articleComment = articleCommentRepository.findById(request.getCommentId()).orElseThrow(()->new ApplicationException(ErrorInfo.SECURITY_EXPIRED_TOKEN.COMMENT_NO_RESOURCE));
+        ArticleComment articleComment = articleCommentRepository.findById(request.getCommentId()).orElseThrow(()->new ApplicationException(ErrorInfo.COMMENT_NO_RESOURCE));
 
         //작성자와 로그인한 유저가 같은지 확인
         if (!articleComment.getCreateUser().getUid().equals(SecurityUtil.getCurrentUserId())){

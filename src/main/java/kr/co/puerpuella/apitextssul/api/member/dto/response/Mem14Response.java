@@ -11,4 +11,10 @@ import lombok.Getter;
 public class Mem14Response extends CommonReturnData {
 
     private String accessToken;
+
+    private Integer uid;
+
+    private String nickname;
+
+
 }
