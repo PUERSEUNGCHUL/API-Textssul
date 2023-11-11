@@ -5,6 +5,8 @@ import kr.co.puerpuella.apitextssul.api.article.dto.response.Art01Response;
 import kr.co.puerpuella.apitextssul.api.article.dto.response.Art01SRArticle;
 import kr.co.puerpuella.apitextssul.common.enums.ArticleCategory;
 import kr.co.puerpuella.apitextssul.common.enums.ArticleType;
+import kr.co.puerpuella.apitextssul.common.enums.OrderDirection;
+import kr.co.puerpuella.apitextssul.common.enums.OrderType;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
@@ -14,9 +16,7 @@ import kr.co.puerpuella.apitextssul.model.entity.Article;
 import kr.co.puerpuella.apitextssul.model.repositories.ArticleRepository;
 import kr.co.puerpuella.apitextssul.model.repositories.spec.ArticleSpecifications;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +41,13 @@ public class Art01ArticleListViewService extends CommonService {
         Art01Request request = (Art01Request) params[0];
 
         // 목록 페이지 조건 설정
-        Pageable pageable = PageRequest.of(request.getPage() == null ? 0 : request.getPage(), request.getLimit() == null ? 20 : request.getLimit());
+        Pageable pageable = PageRequest.of(
+                request.getPage() == null ? 0 : request.getPage(),
+                request.getLimit() == null ? 20 : request.getLimit(),
+                Sort.by(
+                        request.getOrderDirection().getDirection(),
+                        request.getOrderType().getSortProperty())
+                );
 
         // 게시글 검색 조건 설정
         Specification<Article> spec = Specification.where(ArticleSpecifications.withUserUid(request.getAuthorUid()))
@@ -49,7 +55,8 @@ public class Art01ArticleListViewService extends CommonService {
                 .and(ArticleSpecifications.withCategory(request.getCategoryId())));
 
         // 검색조건과 함께 게시글 조회
-        List<Article> articles = articleRepository.findAll(spec, pageable);
+        Page<Article> articlePage = articleRepository.findAll(spec, pageable);
+        List<Article> articles = articlePage.getContent();
         
         // 검색결과를 Response형태로 변환
         Art01Response response = Art01Response.builder()

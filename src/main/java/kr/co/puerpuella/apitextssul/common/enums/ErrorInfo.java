@@ -39,6 +39,9 @@ public enum ErrorInfo {
     LIKE_NO_TYPE(6002, "좋아요구분은 1(좋아요), 0(좋아요 취소)만 가능합니다."),
     LIKE_SAME_REQUEST(6003, "이미 처리되었습니다."),
 
+    ORDER_TYPE_NO(9001, "정렬방식이 유효하지 않습니다."),
+    ORDER_DIRECTION_NO(9002, "정렬방향이 유효하지 않습니다."),
+
     ;
 
 
