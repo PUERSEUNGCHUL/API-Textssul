@@ -21,6 +21,7 @@ import kr.co.puerpuella.apitextssul.api.comment.service.Cmt07CommentRegistryServ
 import kr.co.puerpuella.apitextssul.api.comment.service.Cmt08CommentEditService;
 import kr.co.puerpuella.apitextssul.api.comment.service.Cmt09CommentDeleteService;
 import kr.co.puerpuella.apitextssul.common.framework.CommonController;
+import kr.co.puerpuella.apitextssul.common.framework.response.ResponseBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

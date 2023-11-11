@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
  */
 public class CommonController {
 
-    protected ResponseEntity execute(CommonService service, CommonDTO param) {
+    protected ResponseEntity<ResponseBody> execute(CommonService service, CommonDTO param) {
         return getResponseBody(service, new CommonDTO[] {param});
     }
 

@@ -7,6 +7,7 @@ import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
 import kr.co.puerpuella.apitextssul.common.framework.exception.ApplicationException;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
+import kr.co.puerpuella.apitextssul.common.util.SecurityUtil;
 import kr.co.puerpuella.apitextssul.model.entity.Article;
 import kr.co.puerpuella.apitextssul.model.repositories.ArticleRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,6 @@ public class Art02ArticleViewService extends CommonService {
     protected CommonReturnData execute(CommonDTO... params) {
 
         Art02Request request = (Art02Request) params[0];
-
         Art02Response response = new Art02Response();
 
         Article article = articleRepository.findOneByArticleId(request.getArticleId());
@@ -36,6 +36,8 @@ public class Art02ArticleViewService extends CommonService {
             throw new ApplicationException(ErrorInfo.ARTICLE_NO_RESOURCE);
         }
 
+        response.setLiked(setLikeOnLoginUser(article));
+
         article.addViewCnt();
 
         articleRepository.save(article);
@@ -43,5 +45,17 @@ public class Art02ArticleViewService extends CommonService {
         response.convertEntityToDto(articleRepository.findOneByArticleId(request.getArticleId()));
 
         return response;
+    }
+
+    private boolean setLikeOnLoginUser(Article article) {
+        long likedMemberCnt = article.getLikeMemberList().stream().filter((m) -> {
+            try {
+                return m.getUid().equals(SecurityUtil.getCurrentUserId());
+            } catch (ApplicationException e) {
+                return false;
+            }
+        }).count();
+
+        return likedMemberCnt > 0;
     }
 }

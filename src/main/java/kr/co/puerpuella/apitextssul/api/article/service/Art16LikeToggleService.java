@@ -33,29 +33,31 @@ public class Art16LikeToggleService extends CommonService {
 
         Member currentMember = memberRepository.findOneByUid(SecurityUtil.getCurrentUserId());
 
-        switch (request.getLikeType()) {
-            //좋아요
-            case 1: {
+        long likedMemberCnt = article.getLikeMemberList().stream().filter((m) -> {
+            try {
+                return m.getUid().equals(SecurityUtil.getCurrentUserId());
+            } catch (ApplicationException e) {
+                return false;
+            }
+        }).count();
 
-                article.getLikeMemberList().add(currentMember);
-                break;
-            }
-            //좋아요 취소
-            case 0: {
-                article.getLikeMemberList().remove(currentMember);
-                break;
-            }
-            //타입을 맘대로 넣은 경우
-            default : {
+        if (request.getLikeType() != 0 && request.getLikeType() != 1) {
+            throw new ApplicationException(ErrorInfo.LIKE_NO_TYPE);
+        }
 
-                throw new ApplicationException(ErrorInfo.LIKE_NO_TYPE);
-            }
+        // 좋아요취소요청 + 로그인한 회원의 좋아요가 1건이상 일때
+        if (request.getLikeType() == 0 && likedMemberCnt > 0) {
+            article.getLikeMemberList().remove(currentMember);
+
+        // 좋아요요청 + 로그인한 회원의 좋아요가 0건일때
+        } else if (request.getLikeType() == 1 && likedMemberCnt == 0) {
+            article.getLikeMemberList().add(currentMember);
         }
 
         Article savedArticle = articleRepository.save(article);
 
         return Art16Response.builder()
-                .articleId(savedArticle.getArticleId())
+                .articleId(request.getArticleId())
                 .likeType(request.getLikeType())
                 .likeCnt(savedArticle.getLikeMemberList().size())
                 .build();
