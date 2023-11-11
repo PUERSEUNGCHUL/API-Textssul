@@ -9,6 +9,7 @@ import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 import kr.co.puerpuella.apitextssul.common.framework.response.ResponseBody;
+import kr.co.puerpuella.apitextssul.common.util.SecurityUtil;
 import kr.co.puerpuella.apitextssul.model.entity.Article;
 import kr.co.puerpuella.apitextssul.model.repositories.ArticleRepository;
 import kr.co.puerpuella.apitextssul.model.repositories.spec.ArticleSpecifications;
@@ -66,6 +67,7 @@ public class Art01ArticleListViewService extends CommonService {
                                 .commentCnt(article.getCommentList().size())
                                 .thumbnailImageId(0)
                                 .createDt(article.getCreateDate())
+                                .isLiked(article.getLikeMemberList().stream().anyMatch(member -> member.getUid().equals(SecurityUtil.getCurrentUserIdEx().orElse(null))))
                                 .build()
                         ).collect(
                                 ArrayList<Art01SRArticle>::new,

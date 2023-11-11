@@ -52,4 +52,6 @@ public class Art01SRArticle{
     private String thumbnailImagePath;
 
     private Date createDt;
+
+    private boolean isLiked;
 }

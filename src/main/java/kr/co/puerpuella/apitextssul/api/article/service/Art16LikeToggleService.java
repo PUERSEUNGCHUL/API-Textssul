@@ -33,24 +33,18 @@ public class Art16LikeToggleService extends CommonService {
 
         Member currentMember = memberRepository.findOneByUid(SecurityUtil.getCurrentUserId());
 
-        long likedMemberCnt = article.getLikeMemberList().stream().filter((m) -> {
-            try {
-                return m.getUid().equals(SecurityUtil.getCurrentUserId());
-            } catch (ApplicationException e) {
-                return false;
-            }
-        }).count();
+        boolean isLiked = article.getLikeMemberList().stream().anyMatch(member -> member.getUid().equals(SecurityUtil.getCurrentUserIdEx().orElse(null)));
 
         if (request.getLikeType() != 0 && request.getLikeType() != 1) {
             throw new ApplicationException(ErrorInfo.LIKE_NO_TYPE);
         }
 
-        // 좋아요취소요청 + 로그인한 회원의 좋아요가 1건이상 일때
-        if (request.getLikeType() == 0 && likedMemberCnt > 0) {
+        // 좋아요취소요청 + 로그인한 회원의 좋아요가 존재할때
+        if (request.getLikeType() == 0 && isLiked) {
             article.getLikeMemberList().remove(currentMember);
 
-        // 좋아요요청 + 로그인한 회원의 좋아요가 0건일때
-        } else if (request.getLikeType() == 1 && likedMemberCnt == 0) {
+        // 좋아요요청 + 로그인한 회원의 좋아요가 존재하지 않을 때
+        } else if (request.getLikeType() == 1 && !isLiked) {
             article.getLikeMemberList().add(currentMember);
         }
 
