@@ -23,4 +23,6 @@ public class Cmt06SRComment {
 
     private int likeCnt;
 
+    private boolean isLiked;
+
 }
