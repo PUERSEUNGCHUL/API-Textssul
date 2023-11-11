@@ -17,19 +17,27 @@ import java.util.Optional;
 @NoArgsConstructor
 public class SecurityUtil {
 
+    public static Optional<Integer> getCurrentUserIdEx() {
+
+        try {
+            return Optional.of(getCurrentUserId());
+
+        } catch (ApplicationException e) {
+            return Optional.empty();
+        }
+    }
     public static Integer getCurrentUserId() {
 
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null) {
             log.debug("Security Context에 인증정보가 없습니다.");
-            new ApplicationException(ErrorInfo.TOKEN_NO_USER);
+            throw new ApplicationException(ErrorInfo.TOKEN_NO_USER);
         }
 
         String uid = null;
 
-        if (authentication.getPrincipal() instanceof UserDetails) {
-            UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
+        if (authentication.getPrincipal() instanceof UserDetails springSecurityUser) {
             uid = springSecurityUser.getUsername();
         } else if (authentication.getPrincipal() instanceof String) {
             uid = (String) authentication.getPrincipal();

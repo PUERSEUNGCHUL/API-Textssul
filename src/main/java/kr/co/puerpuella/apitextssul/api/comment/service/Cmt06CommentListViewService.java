@@ -6,7 +6,9 @@ import kr.co.puerpuella.apitextssul.api.comment.dto.response.Cmt06Response;
 import kr.co.puerpuella.apitextssul.api.comment.dto.response.Cmt06SRComment;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.common.framework.CommonService;
+import kr.co.puerpuella.apitextssul.common.framework.exception.ApplicationException;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
+import kr.co.puerpuella.apitextssul.common.util.SecurityUtil;
 import kr.co.puerpuella.apitextssul.model.entity.ArticleComment;
 import kr.co.puerpuella.apitextssul.model.repositories.ArticleCommentRepository;
 import kr.co.puerpuella.apitextssul.model.repositories.spec.ArticleCommentSpecifications;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 답변 목록 조회 서비스
@@ -33,6 +36,8 @@ public class Cmt06CommentListViewService extends CommonService {
 
         Cmt06Request request = (Cmt06Request) params[0];
 
+        Integer uid = SecurityUtil.getCurrentUserIdEx().orElse(null);
+
         // 답변 검색 조건 설정
         Specification<ArticleComment> spec = Specification.where(ArticleCommentSpecifications.withUserUid(request.getAuthorUid()))
                 .and(ArticleCommentSpecifications.withArticleId(request.getArticleId()));
@@ -46,6 +51,8 @@ public class Cmt06CommentListViewService extends CommonService {
                             .authorNick(ac.getCreateUser().getNickname())
                             .createDt(ac.getCreateDate())
                             .likeCnt(ac.getLikeMemberList().size())
+                            .isLiked(ac.getLikeMemberList().stream().anyMatch(member -> member.getUid().equals(uid)))
+                    
                     .build()
         ).collect(
                 ArrayList<Cmt06SRComment>::new,
