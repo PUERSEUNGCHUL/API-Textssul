@@ -42,12 +42,8 @@ public class Art01ArticleListViewService extends CommonService {
 
         // 목록 페이지 조건 설정
         Pageable pageable = PageRequest.of(
-                request.getPage() == null ? 0 : request.getPage(),
-                request.getLimit() == null ? 20 : request.getLimit(),
-                Sort.by(
-                        request.getOrderDirection().getDirection(),
-                        request.getOrderType().getSortProperty())
-                );
+                request.getPage(), request.getLimit(),
+                Sort.by(request.getOrderDirection().getDirection(), request.getOrderType().getSortProperty()));
 
         // 게시글 검색 조건 설정
         Specification<Article> spec = Specification.where(ArticleSpecifications.withUserUid(request.getAuthorUid()))
@@ -59,7 +55,7 @@ public class Art01ArticleListViewService extends CommonService {
         List<Article> articles = articlePage.getContent();
         
         // 검색결과를 Response형태로 변환
-        Art01Response response = Art01Response.builder()
+        return Art01Response.builder()
                 .articleList(articles.stream().map((article) -> Art01SRArticle.builder()
                                 .articleId(article.getArticleId())
                                 .articleTypeId(article.getArticleType().getTypeId())
@@ -81,8 +77,6 @@ public class Art01ArticleListViewService extends CommonService {
                                 ArrayList<Art01SRArticle>::add,
                                 ArrayList<Art01SRArticle>::addAll)
                 ).build();
-
-        return response;
 
     }
 }

@@ -60,17 +60,14 @@ public class Mem14LoginService extends CommonService implements UserDetailsServi
         // 신규 액세스토큰 발급
         String accessToken = createAccessToken(loginForm, savedMember);
 
-        // 응답Header에 토큰 저장
-        setTokenToHeader(accessToken);
-
-        return new Mem14Response(accessToken);
+        return Mem14Response.builder().accessToken(accessToken).uid(savedMember.getUid()).nickname(savedMember.getNickname()).build();
     }
 
     /**
      * 새로운 Access토큰을 생성한다.
-     * @param loginForm
-     * @param savedMember
-     * @return
+     * @param loginForm 로그인 요청 DTO
+     * @param savedMember 요청 DTO로부터 받아온 회원 리소스
+     * @return 새로운 AccessToken
      */
     private String createAccessToken(Mem14Request loginForm, Member savedMember) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(savedMember.getUid(), loginForm.getPassword());
@@ -81,15 +78,6 @@ public class Mem14LoginService extends CommonService implements UserDetailsServi
 
         String jwt = tokenProvider.createToken(authenticate);
         return jwt;
-    }
-
-    /**
-     * 발급받은 Access,Refresh 토큰을 응답Header에 설정한다.
-     * @param accessToken
-     */
-    private static void setTokenToHeader(String accessToken) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + accessToken);
     }
 
     /**
