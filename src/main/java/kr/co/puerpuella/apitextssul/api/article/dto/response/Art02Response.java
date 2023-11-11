@@ -58,6 +58,9 @@ public class Art02Response extends CommonReturnData {
     /** 본문 내용 */
     private String content;
 
+    /** 좋아요 여부 */
+    private boolean isLiked;
+
     private List<String> imagePathList;
 
     public void convertEntityToDto(Article article) {

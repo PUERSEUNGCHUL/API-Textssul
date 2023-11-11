@@ -10,6 +10,7 @@ import kr.co.puerpuella.apitextssul.api.article.dto.request.*;
 import kr.co.puerpuella.apitextssul.api.article.dto.response.*;
 import kr.co.puerpuella.apitextssul.api.article.service.*;
 import kr.co.puerpuella.apitextssul.common.framework.CommonController;
+import kr.co.puerpuella.apitextssul.common.framework.response.ResponseBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
