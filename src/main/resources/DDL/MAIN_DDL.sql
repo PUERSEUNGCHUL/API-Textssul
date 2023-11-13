@@ -25,7 +25,7 @@ CREATE TABLE TB_ARTICLE(
 	ARTICLE_CATEGORY_ID tinyint,
 	ARTICLE_TITLE varchar(255),
 	CONTENT longtext,
-	VIEW_CNT int,
+	VIEW_CNT int DEFAULT 0,
 	CREATE_UID int,
 	CREATE_DT datetime,
 	CREATE_IP varchar(15),
