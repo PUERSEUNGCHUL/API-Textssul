@@ -6,13 +6,15 @@ import kr.co.puerpuella.apitextssul.common.enums.ArticleType;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
 import kr.co.puerpuella.apitextssul.model.entity.Article;
 import kr.co.puerpuella.apitextssul.model.entity.Member;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Art03Request extends CommonDTO {
 
     @Schema(description = "게시글 제목", nullable = false, example = "")
