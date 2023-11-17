@@ -18,8 +18,8 @@ import java.util.stream.Stream;
 public enum OrderType {
     DATE("date", "createDate"),
     VIEW_CNT("viewCnt", "viewCnt"),
-    LIKE_CNT("likeCnt", "likeMemberList"),
-    COMMENT_CNT("commentCnt", "commentList"),
+    LIKE_CNT("likeCnt", "likeMemberList.size"),
+    COMMENT_CNT("commentCnt", "commentList.size"),
     DEFAULT("", "createDate"),
 
     ;

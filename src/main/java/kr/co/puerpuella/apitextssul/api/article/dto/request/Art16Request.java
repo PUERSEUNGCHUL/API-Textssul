@@ -2,11 +2,13 @@ package kr.co.puerpuella.apitextssul.api.article.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import kr.co.puerpuella.apitextssul.common.framework.CommonDTO;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Art16Request extends CommonDTO {
 
     @Schema(description = "조회 대상 게시글 ID(URL Path variable)", nullable = false, example = "1244")
