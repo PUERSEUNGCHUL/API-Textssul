@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
+import org.hibernate.annotations.Formula;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -64,9 +65,15 @@ public class Article extends LabelEntity{
     @Comment("좋아요 회원 목록")
     private List<Member> likeMemberList = new ArrayList<>();
 
+    @Formula("(SELECT count(1) FROM TMP_ARTICLE_LIKE AL WHERE AL.ARTICLE_ID = ARTICLE_ID)")
+    private Integer likeMemberCnt;
+
     @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
     @Comment("댓글 목록")
     private List<ArticleComment> commentList = new ArrayList<>();
+
+    @Formula("(SELECT count(1) FROM TB_COMMENT AC WHERE AC.ARTICLE_ID = ARTICLE_ID)")
+    private Integer commentCnt;
 
     public void update(String articleTitle, int categoryId, int articleTypeId, String articleContent) {
 
