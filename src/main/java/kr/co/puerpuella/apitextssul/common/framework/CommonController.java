@@ -1,11 +1,14 @@
 package kr.co.puerpuella.apitextssul.common.framework;
 
 
+import jakarta.servlet.http.HttpServletResponse;
 import kr.co.puerpuella.apitextssul.common.framework.exception.ApplicationException;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 import kr.co.puerpuella.apitextssul.common.framework.response.ResponseBody;
 import kr.co.puerpuella.apitextssul.common.framework.response.ResponseInfo;
 import org.springframework.http.ResponseEntity;
+
+import java.util.Collections;
 
 /**
  * Rest컨트롤러의 공통기능
@@ -43,7 +46,7 @@ public class CommonController {
             // 서비스의 결과값을 ResponseBody로 감싼다.
             responseBody = ResponseBody.builder()
                     .responseData(returnData)
-                    .responseInfo(ResponseInfo.builder().responseCode(200).build())
+                    .responseInfos(Collections.singletonList(ResponseInfo.builder().responseCode(HttpServletResponse.SC_OK).build()))
                     .build();
 
             return ResponseEntity.ok().body(responseBody);
@@ -52,8 +55,15 @@ public class CommonController {
 
             // 에러정보를 ResponseBody로 감싼다.
             responseBody = ResponseBody.builder()
-                    .responseInfo(ResponseInfo.builder().responseCode(e.getErrorInfo().errorCode).responseMsg(e.getErrorInfo().errorMessage).build())
+                    .responseInfos(Collections.singletonList(
+                                    ResponseInfo.builder()
+                                            .responseCode(e.getErrorInfo().errorCode)
+                                            .responseMsg(e.getErrorInfo().errorMessage)
+                                            .build()
+                            )
+                    )
                     .build();
+
             return ResponseEntity.ok().body(responseBody);
 
         }

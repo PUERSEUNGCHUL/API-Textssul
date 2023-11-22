@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum ErrorInfo {
+    NOT_FOUND_ID(HttpServletResponse.SC_NOT_FOUND, "해당 리소스ID가 존재하지 않습니다."),
+    NOT_FOUND_FILE(HttpServletResponse.SC_NOT_FOUND, "해당 리소스가 ID는 존재하나 실제로 존재하지 않습니다."),
+
+    NOT_FOUND_IMAGE(HttpServletResponse.SC_NOT_FOUND, "존재하지 않는 파일입니다."),
 
     FORBIDDEN(HttpServletResponse.SC_FORBIDDEN, "클라이언트가 인증되지 않았거나, 유효한 인증 정보가 부족하여 요청이 거부되었습니다."),
     UNAUTHORIZED(HttpServletResponse.SC_UNAUTHORIZED, "서버가 해당 요청을 이해했지만, 권한이 없어 요청이 거부되었습니다."),

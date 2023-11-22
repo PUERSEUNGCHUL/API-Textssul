@@ -57,14 +57,30 @@ CREATE TABLE TMP_ARTICLE_LIKE(
 	PRIMARY KEY (ARTICLE_ID, CREATE_UID)
 );
 CREATE TABLE TMP_COMMENT_LIKE(
- COMMENT_ID int,
- CREATE_UID int,
- CREATE_DT datetime,
- CREATE_IP varchar(15),
- UPDATE_UID int,
- UPDATE_DT datetime,
- UPDATE_IP varchar(15),
+     COMMENT_ID int,
+     CREATE_UID int,
+     CREATE_DT datetime,
+     CREATE_IP varchar(15),
+     UPDATE_UID int,
+     UPDATE_DT datetime,
+     UPDATE_IP varchar(15),
  PRIMARY KEY (COMMENT_ID, CREATE_UID)
 );
 
 
+CREATE TABLE TB_IMAGE(
+     IMAGE_ID INT AUTO_INCREMENT,
+     IMAGE_PATH VARCHAR(100),
+     IMAGE_NM_ORIGIN VARCHAR(200),
+     IMAGE_NM VARCHAR(13),
+     IMAGE_EXT VARCHAR(4),
+     IMAGE_SIZE INT,
+     CREATE_UID int,
+     CREATE_DT datetime,
+     CREATE_IP varchar(15),
+     UPDATE_UID int,
+     UPDATE_DT datetime,
+     UPDATE_IP varchar(15),
+     PRIMARY KEY (IMAGE_ID)
+
+);
