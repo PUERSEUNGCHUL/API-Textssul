@@ -30,14 +30,14 @@ public class Art03Request extends CommonDTO {
     private int articleTypeId;
 
     @Schema(description = "본문 내용", nullable = false, example = "")
-    private String content;
+    private String articleContent;
 
     public Article toEntity() {
         Article article = Article.builder()
                 .articleTitle(this.articleTitle)
                 .articleCategory(ArticleCategory.resolve(this.categoryId))
                 .articleType(ArticleType.resolve(this.articleTypeId))
-                .content(this.content)
+                .content(this.articleContent)
                 .viewCnt(0)
                 .build();
 

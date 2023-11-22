@@ -56,7 +56,7 @@ public class Art02Response extends CommonReturnData {
     private String thumbnailImagePath;
 
     /** 본문 내용 */
-    private String content;
+    private String articleContent;
 
     /** 좋아요 여부 */
     private boolean isLiked;
@@ -76,7 +76,7 @@ public class Art02Response extends CommonReturnData {
         this.viewCnt = article.getViewCnt();
         this.commentCnt = article.getCommentList().size();
         this.likeCnt = article.getLikeMemberList().size();
-        this.content = article.getContent();
+        this.articleContent = article.getContent();
 
     }
 }
