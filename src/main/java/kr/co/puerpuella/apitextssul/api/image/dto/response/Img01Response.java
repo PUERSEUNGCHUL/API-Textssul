@@ -11,4 +11,6 @@ import lombok.EqualsAndHashCode;
 public class Img01Response extends CommonReturnData {
 
     private Integer imageId;
+    
+    private String fileName;
 }

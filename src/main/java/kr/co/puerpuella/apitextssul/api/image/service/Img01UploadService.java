@@ -58,7 +58,7 @@ public class Img01UploadService extends CommonService {
 
 
 
-        return Img01Response.builder().imageId(newImage.getImageId()).build();
+        return Img01Response.builder().imageId(newImage.getImageId()).fileName(newImage.getImageOriginalName()).build();
     }
 
     /**
