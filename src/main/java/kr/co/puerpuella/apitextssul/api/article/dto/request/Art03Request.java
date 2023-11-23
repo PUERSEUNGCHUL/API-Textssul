@@ -32,6 +32,9 @@ public class Art03Request extends CommonDTO {
     @Schema(description = "본문 내용", nullable = false, example = "")
     private String articleContent;
 
+    @Schema(description = "본문 이미지")
+    private List<Integer> imageIdList;
+
     public Article toEntity() {
         Article article = Article.builder()
                 .articleTitle(this.articleTitle)

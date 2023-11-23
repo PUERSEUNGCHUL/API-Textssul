@@ -5,9 +5,8 @@ import lombok.*;
 
 @Entity
 @Table(name = "TB_IMAGE")
-@Getter
-@Setter
 @Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Image extends LabelEntity{
@@ -16,6 +15,11 @@ public class Image extends LabelEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IMAGE_ID")
     private Integer imageId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ARTICLE_ID")
+    @Setter
+    private Article article;
 
     @Column(name = "IMAGE_PATH")
     private String imagePath;
@@ -37,4 +41,5 @@ public class Image extends LabelEntity{
     public int hashCode() {
         return this.imageId;
     }
+
 }
