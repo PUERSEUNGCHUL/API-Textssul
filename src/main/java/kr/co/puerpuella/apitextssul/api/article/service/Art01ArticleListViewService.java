@@ -3,6 +3,7 @@ package kr.co.puerpuella.apitextssul.api.article.service;
 import kr.co.puerpuella.apitextssul.api.article.dto.request.Art01Request;
 import kr.co.puerpuella.apitextssul.api.article.dto.response.Art01Response;
 import kr.co.puerpuella.apitextssul.api.article.dto.response.Art01SRArticle;
+import kr.co.puerpuella.apitextssul.common.dto.Com01Image;
 import kr.co.puerpuella.apitextssul.common.enums.ArticleCategory;
 import kr.co.puerpuella.apitextssul.common.enums.ArticleType;
 import kr.co.puerpuella.apitextssul.common.enums.OrderDirection;
@@ -48,7 +49,9 @@ public class Art01ArticleListViewService extends CommonService {
         // 게시글 검색 조건 설정
         Specification<Article> spec = Specification.where(ArticleSpecifications.withUserUid(request.getAuthorUid()))
                 .and(ArticleSpecifications.withArticleType(request.getArticleTypeId())
-                .and(ArticleSpecifications.withCategory(request.getCategoryId())));
+                .and(ArticleSpecifications.withCategory(request.getCategoryId())
+                .and(ArticleSpecifications.withTitle(request.getArticleTitle())
+                .and(ArticleSpecifications.withContent(request.getArticleContent())))));
 
         // 검색조건과 함께 게시글 조회
         Page<Article> articlePage = articleRepository.findAll(spec, pageable);
@@ -68,7 +71,7 @@ public class Art01ArticleListViewService extends CommonService {
                                 .viewCnt(article.getViewCnt())
                                 .likeCnt(article.getLikeMemberList().size())
                                 .commentCnt(article.getCommentList().size())
-                                .thumbnailImageId(0)
+                                .thumbnailImage(Com01Image.builder().build())
                                 .createDt(article.getCreateDate())
                                 .isLiked(article.getLikeMemberList().stream().anyMatch(member -> member.getUid().equals(SecurityUtil.getCurrentUserIdEx().orElse(null))))
                                 .build()
