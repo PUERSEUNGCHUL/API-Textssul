@@ -52,9 +52,9 @@ public class SecurityUtil {
         }
     }
 
-    public static void setResponse(HttpServletResponse response, ErrorInfo errorInfo) throws IOException {
+    public static void setResponse(int status, HttpServletResponse response, ErrorInfo errorInfo) throws IOException {
         response.setContentType("application/json;charset=UTF-8");
-        response.setStatus(errorInfo.errorCode);
+        response.setStatus(status);
         response.getWriter().println("{ \"responseData\" : {},"
                 + "\"responseInfo\" : {"
                 + "\"responseCode\" : " + errorInfo.errorCode + ","

@@ -5,10 +5,6 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum ErrorInfo {
-    NOT_FOUND_ID(HttpServletResponse.SC_NOT_FOUND, "해당 리소스ID가 존재하지 않습니다."),
-    NOT_FOUND_FILE(HttpServletResponse.SC_NOT_FOUND, "해당 리소스가 ID는 존재하나 실제로 존재하지 않습니다."),
-
-    NOT_FOUND_IMAGE(HttpServletResponse.SC_NOT_FOUND, "존재하지 않는 파일입니다."),
 
     FORBIDDEN(HttpServletResponse.SC_FORBIDDEN, "클라이언트가 인증되지 않았거나, 유효한 인증 정보가 부족하여 요청이 거부되었습니다."),
     UNAUTHORIZED(HttpServletResponse.SC_UNAUTHORIZED, "서버가 해당 요청을 이해했지만, 권한이 없어 요청이 거부되었습니다."),
@@ -18,14 +14,14 @@ public enum ErrorInfo {
     LOGIN_INVALID_PASSWORD(2002, "패스워드가 일치하지 않습니다."),
 
 
-    SECURITY_INVALID_AUTHORIZED(1007, "로그인되어있지 않습니다."),
-    SECURITY_ACCESS_DENIED(HttpServletResponse.SC_FORBIDDEN,"액세스가 거부되었습니다."),
-    SECURITY_INVALID_SIGN(HttpServletResponse.SC_FORBIDDEN,"잘못된 JWT 서명입니다."),
-    SECURITY_EXPIRED_TOKEN(HttpServletResponse.SC_UNAUTHORIZED,"만료된 JWT 토큰입니다."),
-    SECURITY_NO_SUPPORT_TOKEN(HttpServletResponse.SC_PAYMENT_REQUIRED,"지원되지 않는 JWT토큰입니다."),
-    SECURITY_INVALID_TOKEN(HttpServletResponse.SC_PAYMENT_REQUIRED,"JWT 토큰이 잘못되었습니다."),
-    SECURITY_NO_TOKEN(HttpServletResponse.SC_FORBIDDEN,"JWT 토큰이 존재하지 않습니다."),
-    SECURITY_NO_MATCH_REFRESH_TOKEN(1014,"유효하지 않은 Refresh토큰입니다."),
+    SECURITY_INVALID_AUTHORIZED(3001, "로그인되어있지 않습니다."),
+    SECURITY_ACCESS_DENIED(3002,"액세스가 거부되었습니다."),
+    SECURITY_INVALID_SIGN(3011,"잘못된 JWT 서명입니다."),
+    SECURITY_EXPIRED_TOKEN(3012,"만료된 JWT 토큰입니다."),
+    SECURITY_NO_SUPPORT_TOKEN(3013,"지원되지 않는 JWT토큰입니다."),
+    SECURITY_INVALID_TOKEN(3014,"JWT 토큰이 잘못되었습니다."),
+    SECURITY_NO_TOKEN(3015,"JWT 토큰이 존재하지 않습니다."),
+    SECURITY_NO_MATCH_REFRESH_TOKEN(3020,"유효하지 않은 Refresh토큰입니다."),
 
 
     TOKEN_NO_USER(4001, "존재하지 않는 유저입니다."),

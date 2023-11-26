@@ -22,10 +22,10 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
             ErrorInfo exceptionInfo = (ErrorInfo) request.getAttribute("exception");
 
-            SecurityUtil.setResponse(response, exceptionInfo);
+            SecurityUtil.setResponse(HttpServletResponse.SC_UNAUTHORIZED, response, exceptionInfo);
         } catch (Exception e) {
 
-            SecurityUtil.setResponse(response,ErrorInfo.UNAUTHORIZED);
+            SecurityUtil.setResponse(HttpServletResponse.SC_UNAUTHORIZED, response,ErrorInfo.UNAUTHORIZED);
         }
 
     }
