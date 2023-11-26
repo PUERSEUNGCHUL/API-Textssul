@@ -33,4 +33,24 @@ public interface ArticleSpecifications {
             return builder.equal(root.get("articleCategory"), ArticleCategory.resolve(category));
         };
     }
+
+    static Specification<Article> withTitle(String articleTitle) {
+        return (root, query, criteriaBuilder) -> {
+            if (articleTitle == null) {
+                return null;
+            }
+
+            return criteriaBuilder.like(root.get("articleTitle"), articleTitle);
+        };
+    }
+
+    static Specification<Article> withContent(String articleContent) {
+        return (root, query, criteriaBuilder) -> {
+            if (articleContent == null) {
+                return null;
+            }
+
+            return criteriaBuilder.like(root.get("articleContent"), articleContent);
+        };
+    }
 }

@@ -39,6 +39,9 @@ public class Art01Request extends CommonDTO {
     @Schema(description = "검색조건(카테고리)", nullable = true, example = "1")
     private Integer categoryId;
 
-    @Schema(description = "검색조건(제목)", nullable = true, example = "1")
+    @Schema(description = "검색조건(글타입)", nullable = true, example = "1")
     private Integer articleTypeId;
+
+    @Schema(description = "검색조건(본문)", nullable = true, example = "모험")
+    private String articleContent;
 }
