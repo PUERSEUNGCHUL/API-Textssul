@@ -1,5 +1,6 @@
 package kr.co.puerpuella.apitextssul.api.article.dto.response;
 
+import kr.co.puerpuella.apitextssul.common.dto.Com01Image;
 import lombok.Builder;
 import lombok.Data;
 
@@ -45,11 +46,8 @@ public class Art01SRArticle{
     /** 게시글 코멘트 수 */
     private int commentCnt;
 
-    /** 썸네일 이미지 ID */
-    private int thumbnailImageId;
-
-    /** 썸네일 이미지 주소 */
-    private String thumbnailImagePath;
+    /** 썸네일 이미지 */
+    private Com01Image thumbnailImage;
 
     private Date createDt;
 
