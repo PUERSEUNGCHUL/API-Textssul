@@ -1,15 +1,15 @@
 package kr.co.puerpuella.apitextssul.api.article.dto.response;
 
+import kr.co.puerpuella.apitextssul.common.dto.Com01Image;
 import kr.co.puerpuella.apitextssul.common.framework.response.CommonReturnData;
 import kr.co.puerpuella.apitextssul.model.entity.Article;
 import kr.co.puerpuella.apitextssul.model.repositories.ArticleRepository;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+@EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
 @NoArgsConstructor
@@ -61,7 +61,7 @@ public class Art02Response extends CommonReturnData {
     /** 좋아요 여부 */
     private boolean isLiked;
 
-    private List<String> imagePathList;
+    private List<Com01Image> imageList;
 
     public void convertEntityToDto(Article article) {
 
@@ -77,6 +77,12 @@ public class Art02Response extends CommonReturnData {
         this.commentCnt = article.getCommentList().size();
         this.likeCnt = article.getLikeMemberList().size();
         this.articleContent = article.getContent();
+        this.imageList = article.getImageList().stream().map(image ->
+                Com01Image.builder()
+                        .imageId(image.getImageId())
+                        .fileName(image.getImageOriginalName())
+                        .build())
+                .collect(Collectors.toList());
 
     }
 }

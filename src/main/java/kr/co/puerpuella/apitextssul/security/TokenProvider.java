@@ -3,6 +3,8 @@ package kr.co.puerpuella.apitextssul.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import kr.co.puerpuella.apitextssul.common.enums.ErrorInfo;
+import kr.co.puerpuella.apitextssul.common.framework.exception.ApplicationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -100,17 +102,20 @@ public class TokenProvider implements InitializingBean {
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
 
             logger.info("잘못된 JWT 서명입니다.");
+            throw new ApplicationException(ErrorInfo.SECURITY_INVALID_TOKEN);
         } catch (ExpiredJwtException e) {
 
             logger.info("만료된 JWT 토큰입니다.");
+            throw new ApplicationException(ErrorInfo.SECURITY_EXPIRED_TOKEN);
         } catch (UnsupportedJwtException e) {
 
             logger.info("지원되지 않는 JWT 토큰입니다.");
+            throw new ApplicationException(ErrorInfo.SECURITY_NO_SUPPORT_TOKEN);
         } catch (IllegalArgumentException e) {
 
             logger.info("JWT 토큰이 잘못되었습니다.");
+            throw new ApplicationException(ErrorInfo.SECURITY_INVALID_TOKEN);
         }
-        return false;
     }
 
 }
