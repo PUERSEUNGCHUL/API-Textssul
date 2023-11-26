@@ -21,6 +21,9 @@ public class Image extends LabelEntity{
     @Setter
     private Article article;
 
+    @Column(name = "SORT_ORDER")
+    private Integer sortOrder;
+
     @Column(name = "IMAGE_PATH")
     private String imagePath;
 

@@ -70,10 +70,12 @@ public class Article extends LabelEntity{
 
     @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
     @Comment("댓글 목록")
+    @OrderBy("createDate desc")
     private List<ArticleComment> commentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
-    @Comment("댓글 목록")
+    @OrderBy("sortOrder asc")
+    @Comment("이미지 목록")
     private List<Image> imageList = new ArrayList<>();
 
     @Formula("(SELECT count(1) FROM TB_COMMENT AC WHERE AC.ARTICLE_ID = ARTICLE_ID)")
