@@ -9,5 +9,5 @@ public class Com01Image {
 
     private Integer imageId;
 
-    private String fileName;
+    private String filePath;
 }
