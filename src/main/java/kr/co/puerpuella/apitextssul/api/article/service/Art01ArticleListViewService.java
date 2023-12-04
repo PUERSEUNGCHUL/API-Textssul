@@ -51,7 +51,8 @@ public class Art01ArticleListViewService extends CommonService {
                 .and(ArticleSpecifications.withArticleType(request.getArticleTypeId())
                 .and(ArticleSpecifications.withCategory(request.getCategoryId())
                 .and(ArticleSpecifications.withTitle(request.getArticleTitle())
-                .and(ArticleSpecifications.withContent(request.getArticleContent())))));
+                .and(ArticleSpecifications.withContent(request.getArticleContent())
+                .and(ArticleSpecifications.withCommentByUid(request.getCommentByUid()))))));
 
         // 검색조건과 함께 게시글 조회
         Page<Article> articlePage = articleRepository.findAll(spec, pageable);

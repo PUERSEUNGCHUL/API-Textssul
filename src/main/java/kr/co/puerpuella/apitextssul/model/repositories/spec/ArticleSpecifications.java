@@ -1,8 +1,12 @@
 package kr.co.puerpuella.apitextssul.model.repositories.spec;
 
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
 import kr.co.puerpuella.apitextssul.common.enums.ArticleCategory;
 import kr.co.puerpuella.apitextssul.common.enums.ArticleType;
 import kr.co.puerpuella.apitextssul.model.entity.Article;
+import kr.co.puerpuella.apitextssul.model.entity.ArticleComment;
+import kr.co.puerpuella.apitextssul.model.entity.Member;
 import org.springframework.data.jpa.domain.Specification;
 
 public interface ArticleSpecifications {
@@ -51,6 +55,19 @@ public interface ArticleSpecifications {
             }
 
             return criteriaBuilder.like(root.get("articleContent"), articleContent);
+        };
+    }
+
+    static Specification<Article> withCommentByUid(Integer uid) {
+        return (root, query, criteriaBuilder) -> {
+            if (uid == null) {
+                return null;
+            }
+
+            Join<Article, ArticleComment> commentJoin = root.join("commentList", JoinType.LEFT);
+            Join<ArticleComment, Member> memberJoin = commentJoin.join("likeMemberList", JoinType.LEFT);
+
+            return criteriaBuilder.equal(commentJoin.get("createUser").get("uid"), uid);
         };
     }
 }

@@ -33,6 +33,9 @@ public class Art01Request extends CommonDTO {
     @Schema(description = "검색조건(작성자)", nullable = true, example = "324222")
     private Integer authorUid;
 
+    @Schema(description = "검색조건(코멘트 단 게시글)", nullable = true, example = "324222")
+    private Integer commentByUid;
+
     @Schema(description = "검색조건(제목)", nullable = true, example = "똘똘이")
     private String articleTitle;
 
