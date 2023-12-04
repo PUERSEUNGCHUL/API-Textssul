@@ -1,3 +1,5 @@
+server:
+  port: 8090
 spring:
   servlet:
     multipart:
@@ -5,9 +7,9 @@ spring:
       max-request-size: 100MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/TSADMIN?serverTimezone=Asia/Seoul
-    username: root
-    password: 1111
+    url: jdbc:mysql://ec2-3-21-44-11.us-east-2.compute.amazonaws.com:3306/TSADMIN?serverTimezone=Asia/Seoul
+    username: tsadmin
+    password: 1qaz!QAZ
 
   jpa:
     hibernate:
