@@ -80,7 +80,7 @@ public class Art02Response extends CommonReturnData {
         this.imageList = article.getImageList().stream().map(image ->
                 Com01Image.builder()
                         .imageId(image.getImageId())
-                        .fileName(image.getImageOriginalName())
+                        .filePath(image.getImageOriginalName())
                         .build())
                 .collect(Collectors.toList());
 

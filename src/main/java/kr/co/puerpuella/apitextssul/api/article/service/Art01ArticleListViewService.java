@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 게시글 목록 조회 서비스
@@ -57,25 +58,32 @@ public class Art01ArticleListViewService extends CommonService {
         // 검색조건과 함께 게시글 조회
         Page<Article> articlePage = articleRepository.findAll(spec, pageable);
         List<Article> articles = articlePage.getContent();
-        
+
+        Random r = new Random();
         // 검색결과를 Response형태로 변환
         return Art01Response.builder()
-                .articleList(articles.stream().map((article) -> Art01SRArticle.builder()
-                                .articleId(article.getArticleId())
-                                .articleTypeId(article.getArticleType().getTypeId())
-                                .articleTypeNm(article.getArticleType().getTypeName())
-                                .categoryId(article.getArticleCategory().getCategoryId())
-                                .categoryNm(article.getArticleCategory().getCategoryName())
-                                .articleTitle(article.getArticleTitle())
-                                .authorUid(article.getCreateUser().getUid())
-                                .authorNick(article.getCreateUser().getNickname())
-                                .viewCnt(article.getViewCnt())
-                                .likeCnt(article.getLikeMemberList().size())
-                                .commentCnt(article.getCommentList().size())
-                                .thumbnailImage(Com01Image.builder().build())
-                                .createDt(article.getCreateDate())
-                                .isLiked(article.getLikeMemberList().stream().anyMatch(member -> member.getUid().equals(SecurityUtil.getCurrentUserIdEx().orElse(null))))
-                                .build()
+                .articleList(articles.stream().map((article) -> {
+                    int randomIdx = r.nextInt(10) + 1;
+                    return Art01SRArticle.builder()
+                                            .articleId(article.getArticleId())
+                                            .articleTypeId(article.getArticleType().getTypeId())
+                                            .articleTypeNm(article.getArticleType().getTypeName())
+                                            .categoryId(article.getArticleCategory().getCategoryId())
+                                            .categoryNm(article.getArticleCategory().getCategoryName())
+                                            .articleTitle(article.getArticleTitle())
+                                            .authorUid(article.getCreateUser().getUid())
+                                            .authorNick(article.getCreateUser().getNickname())
+                                            .viewCnt(article.getViewCnt())
+                                            .likeCnt(article.getLikeMemberList().size())
+                                            .commentCnt(article.getCommentList().size())
+                                            .thumbnailImage(Com01Image.builder()
+                                                    .imageId(randomIdx)
+                                                    .filePath("/v1/api/images/"+randomIdx+"/c"+randomIdx+".jpg")
+                                                    .build())
+                                            .createDt(article.getCreateDate())
+                                            .isLiked(article.getLikeMemberList().stream().anyMatch(member -> member.getUid().equals(SecurityUtil.getCurrentUserIdEx().orElse(null))))
+                                            .build();
+                                }
                         ).collect(
                                 ArrayList<Art01SRArticle>::new,
                                 ArrayList<Art01SRArticle>::add,
