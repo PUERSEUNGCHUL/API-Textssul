@@ -45,6 +45,9 @@ public class ImageUtil {
 
         boolean isMakes = directory.mkdirs();
 
+        System.out.println("sb.toString() = " + sb.toString());
+        System.out.println("isMakes = " + isMakes);
+
         sb.append(c.getTimeInMillis());
 
 
