@@ -44,7 +44,7 @@ public class ImageUtil {
 
         File directory = new File(sb.toString());
 
-        Files.createDirectory(directory.toPath());
+        directory.mkdirs();
 
 
         sb.append(c.getTimeInMillis());
