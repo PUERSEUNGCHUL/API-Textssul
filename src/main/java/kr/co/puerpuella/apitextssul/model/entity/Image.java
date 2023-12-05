@@ -1,6 +1,7 @@
 package kr.co.puerpuella.apitextssul.model.entity;
 
 import jakarta.persistence.*;
+import kr.co.puerpuella.apitextssul.common.enums.convertor.BooleanConvertor;
 import lombok.*;
 
 @Entity

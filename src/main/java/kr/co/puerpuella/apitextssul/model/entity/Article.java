@@ -73,6 +73,9 @@ public class Article extends LabelEntity{
     @OrderBy("createDate desc")
     private List<ArticleComment> commentList = new ArrayList<>();
 
+    @Column(name = "THUMBNAIL_IMAGE_ID")
+    private Integer thumbnailImageId;
+
     @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
     @OrderBy("sortOrder asc")
     @Comment("이미지 목록")

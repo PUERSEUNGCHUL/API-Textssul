@@ -15,6 +15,7 @@ import kr.co.puerpuella.apitextssul.common.framework.response.ResponseBody;
 import kr.co.puerpuella.apitextssul.common.util.SecurityUtil;
 import kr.co.puerpuella.apitextssul.model.entity.Article;
 import kr.co.puerpuella.apitextssul.model.repositories.ArticleRepository;
+import kr.co.puerpuella.apitextssul.model.repositories.ImageRepository;
 import kr.co.puerpuella.apitextssul.model.repositories.spec.ArticleSpecifications;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
@@ -37,6 +38,9 @@ import java.util.Random;
 public class Art01ArticleListViewService extends CommonService {
 
     private final ArticleRepository articleRepository;
+
+    private final ImageRepository imageRepository;
+
     @Override
     protected CommonReturnData execute(CommonDTO... params) {
 
@@ -74,11 +78,11 @@ public class Art01ArticleListViewService extends CommonService {
                                             .authorUid(article.getCreateUser().getUid())
                                             .authorNick(article.getCreateUser().getNickname())
                                             .viewCnt(article.getViewCnt())
-                                            .likeCnt(article.getLikeMemberList().size())
-                                            .commentCnt(article.getCommentList().size())
+                                            .likeCnt(article.getLikeMemberCnt())
+                                            .commentCnt(article.getCommentCnt())
                                             .thumbnailImage(Com01Image.builder()
-                                                    .imageId(randomIdx)
-                                                    .filePath("/v1/api/images/"+randomIdx+"/c"+randomIdx+".jpg")
+                                                    .imageId(article.getThumbnailImageId())
+                                                    .filePath("/v1/api/images/"+article.getThumbnailImageId()+"/c"+article.getThumbnailImageId()+".jpg")
                                                     .build())
                                             .createDt(article.getCreateDate())
                                             .isLiked(article.getLikeMemberList().stream().anyMatch(member -> member.getUid().equals(SecurityUtil.getCurrentUserIdEx().orElse(null))))
