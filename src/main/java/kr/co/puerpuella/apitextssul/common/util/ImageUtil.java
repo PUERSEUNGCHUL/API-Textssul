@@ -8,6 +8,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Calendar;
 
 @Component
@@ -43,12 +44,11 @@ public class ImageUtil {
 
         File directory = new File(sb.toString());
 
-        boolean isMakes = directory.mkdirs();
+        Files.createDirectory(directory.toPath());
 
-        System.out.println("sb.toString() = " + sb.toString());
-        System.out.println("isMakes = " + isMakes);
 
         sb.append(c.getTimeInMillis());
+        System.out.println("sb.toString() = " + sb.toString());
 
 
         File newFile = new File(sb.toString());
